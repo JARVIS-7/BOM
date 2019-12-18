@@ -10,5 +10,4 @@ Diese Version lebt und funktioniert dank JARVIS-7.
 
 
 
-
 Andere Sniper-Software findet man hier: http://www.schnapper.de
