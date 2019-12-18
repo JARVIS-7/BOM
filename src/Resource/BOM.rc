@@ -1,0 +1,40 @@
+;#define CREATEPROCESS_MANIFEST_RESOURCE_ID 1
+;#define RT_MANIFEST 24
+
+;CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "Biet-O-Matic.exe.manifest"
+
+101 ICON "Icon_01.ico"
+
+102 ICON "Icon_02.ico"
+
+103 ICON "Icon_03.ico"
+
+104 ICON "Icon_04.ico"
+
+105 ICON "Icon_05.ico"
+
+106 ICON "Icon_06.ico"
+
+107 ICON "Icon_07.ico"
+
+108 ICON "Icon_08.ico"
+
+109 ICON "Icon_09.ico"
+
+110 ICON "Icon_10.ico"
+
+111 ICON "Icon_11.ico"
+
+112 ICON "Icon_12.ico"
+
+113 ICON "Icon_13.ico"
+
+114 ICON "Icon_14.ico"
+
+115 ICON "Icon_15.ico"
+
+116 ICON "Icon_16.ico"
+
+201 ICON "Icon_20.ico"
+
+202 ICON "Icon_21.ico"
