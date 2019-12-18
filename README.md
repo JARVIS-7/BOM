@@ -10,4 +10,4 @@ Diese Version lebt und funktioniert dank JARVIS-7.
 
 
 
-Andere Sniper-Spoftware findet man hier: http://www.schnapper.de
+Andere Sniper-Software findet man hier: http://www.schnapper.de
