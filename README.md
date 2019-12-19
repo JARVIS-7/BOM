@@ -12,6 +12,7 @@ Jarvis-7 ersetzt das von BOM bislang verwendete cURL.exe um mit den eBay-Servern
 
 Jarvis-7 ist nicht quelloffen und unterliegt einer proprietären Lizenz.
 
+ 
 
 
 
