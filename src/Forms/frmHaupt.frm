@@ -3101,7 +3101,7 @@ If Not bDontAsk Then
 End If 'dont ask
 
 Call PanelText(StatusBar1, 2, gsarrLangTxt(88))
-sServer = "http://" & gsScript1 & gsScriptCommand1
+sServer = "https://" & gsScript1 & gsScriptCommand1
 'Test
 'gsEbayLocalPass = URLEncode(gsEbayLocalPass)
 'gsUser = URLEncode(gsUser)
@@ -3310,7 +3310,7 @@ mbIsLoggingIn = True
     
         Call PanelText(StatusBar1, 2, "Logout")
         
-        sServer = "http://" & gsScript5 & gsScriptCommand5
+        sServer = "https://" & gsScript5 & gsScriptCommand5
         
         'Logout
         sKommando = gsCmdLogOff
@@ -3504,7 +3504,7 @@ Function LogIn2(ByVal sTxt As String) As String
   sLoginPass = gsPass
   bLoginUseSecurityToken = gbUseSecurityToken
 
-  sServer = "http://" & gsScript5 & gsScriptCommand5
+  sServer = "https://" & gsScript5 & gsScriptCommand5
   sKommando = gsCmdLogIn
 
 ' DebugPrint "Login mit User: " & sLoginUser, "Pass: " & sLoginPass
@@ -3983,10 +3983,10 @@ sTmp = Replace(sTmp, "[MaxBid]", sMaxBid)
 
 sKommando = sBuffer & sTmp
 
-sServer = "http://" & gsScript4 & gsScriptCommand4
+sServer = "https://" & gsScript4 & gsScriptCommand4
 sReferer = sServer & "ViewItem&item=" & sItem
 
-sServer = "http://" & gsScript3 & gsScriptCommand3
+sServer = "https://" & gsScript3 & gsScriptCommand3
 
 Call DebugPrint("Sende Anfrage zum Server: " & sServer & sKommando)
 
@@ -4094,7 +4094,7 @@ Do While lVersuch < mlMAXBIETVERSUCHE
   If Not oHtmlForm.FormFound Then oHtmlForm.ReadForm sBuffer, IIf(bIsBuyItNow, gsAnsBuyForm2, gsAnsBidForm2)   'nächster Versuch (egun) / Belehrungsseite ('bay)
   If Not oHtmlForm.FormFound Then
     'zuerst ein LogOff
-    sServer = "http://" & gsScript5 & gsScriptCommand5
+    sServer = "https://" & gsScript5 & gsScriptCommand5
     sKommando = gsCmdLogOff
     sBuffer = ShortPost(sServer & sKommando, , , sEBayUser)
     Call DebugPrint("Neustart")
@@ -4143,7 +4143,7 @@ Do While lVersuch < mlMAXBIETVERSUCHE
     
     'Plain old LogOff
     Call DebugPrint("Normal Logout")
-    sServer = "http://" & gsScript5 & gsScriptCommand5
+    sServer = "https://" & gsScript5 & gsScriptCommand5
     sKommando = gsCmdLogOff
     sBuffer = ShortPost(sServer & sKommando, , , sEBayUser)
     GoTo NochmalVonVorne
@@ -6344,7 +6344,7 @@ Const iMaxUpdateVersuche As Integer = 3
 
     If sResultPage = "" Then
    
-        sServer = "http://" & gsScript4 & gsScriptCommand4
+        sServer = "https://" & gsScript4 & gsScriptCommand4
     
         sBuffer = ""
     
@@ -6367,7 +6367,7 @@ Const iMaxUpdateVersuche As Integer = 3
     Do While InStr(1, sBuffer, gsAnsSwitchToAnonymous) > 0 And iAnzUpdateVersuche < iMaxUpdateVersuche
       iAnzUpdateVersuche = iAnzUpdateVersuche + 1
       gbUpdateAnonymous = True
-      sServer = "http://" & gsScript4 & gsScriptCommand4
+      sServer = "https://" & gsScript4 & gsScriptCommand4
       sBuffer = ""
       sTmp = gsCmdViewItem
       sTmp = Replace(sTmp, "[Item]", sItem)
@@ -6565,7 +6565,7 @@ Dim sServer As String
 Dim sKommando As String
 Dim sTmp As String
 
-sServer = "http://" & gsScript2 & gsScriptCommand2
+sServer = "https://" & gsScript2 & gsScriptCommand2
 sKommando = gsCmdTimeShow
 
 Do While sTmp = "" And i < 10
@@ -6605,7 +6605,7 @@ Dim fOffsetLocalKorrektur As Double
     'wir messen die Laufzeit
     fLap = Timer
     
-    sServer = "http://" & gsScript2 & gsScriptCommand2
+    sServer = "https://" & gsScript2 & gsScriptCommand2
     sKommando = gsCmdTimeShow
     sTmp = ShortPost(sServer & sKommando)
     
