@@ -6371,6 +6371,7 @@ Const iMaxUpdateVersuche As Integer = 3
       sBuffer = ""
       sTmp = gsCmdViewItem
       sTmp = Replace(sTmp, "[Item]", sItem)
+      
       sKommando = sBuffer & sTmp
       sBuffer = ShortPost(sServer & sKommando, , , "anonymous", True)
     Loop
@@ -6696,7 +6697,7 @@ Private Sub Titel_MouseDown(Index As Integer, Button As Integer, Shift As Intege
                     sTmp = Replace(sTmp, "[Item]", Artikel(Index).Text)
                     
                     DoEvents
-                    gsGlobalUrl = "http://" & gsScript4 & gsScriptCommand4 & sTmp
+                    gsGlobalUrl = "https://" & gsMainUrl & sTmp
                     
                     'Call ShowBrowser(Me.hWnd)
                     Call ExecuteDoc(Me.hWnd, gsGlobalUrl)
