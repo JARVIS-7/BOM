@@ -6344,7 +6344,7 @@ Const iMaxUpdateVersuche As Integer = 3
 
     If sResultPage = "" Then
    
-        sServer = "https://" & gsScript4 & gsScriptCommand4
+        sServer = "https://" & gsMainUrl ' & gsScriptCommand4
     
         sBuffer = ""
     
