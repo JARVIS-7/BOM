@@ -50,6 +50,26 @@ Begin VB.Form frmAbout
    End
    Begin VB.Label lblAbout 
       BackStyle       =   0  'Transparent
+      Caption         =   "JARVIS-7 - Version"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   240
+      Index           =   6
+      Left            =   1920
+      TabIndex        =   12
+      Top             =   2100
+      UseMnemonic     =   0   'False
+      Width           =   3885
+   End
+   Begin VB.Label lblAbout 
+      BackStyle       =   0  'Transparent
       Caption         =   "Langfile - Version"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
@@ -64,7 +84,7 @@ Begin VB.Form frmAbout
       Index           =   9
       Left            =   1920
       TabIndex        =   10
-      Top             =   2595
+      Top             =   2715
       UseMnemonic     =   0   'False
       Width           =   3885
    End
@@ -84,7 +104,7 @@ Begin VB.Form frmAbout
       Index           =   8
       Left            =   1920
       TabIndex        =   9
-      Top             =   2310
+      Top             =   2400
       UseMnemonic     =   0   'False
       Width           =   3885
    End
@@ -104,7 +124,7 @@ Begin VB.Form frmAbout
       Index           =   7
       Left            =   1920
       TabIndex        =   8
-      Top             =   2025
+      Top             =   1700
       UseMnemonic     =   0   'False
       Width           =   3885
    End
@@ -126,7 +146,7 @@ Begin VB.Form frmAbout
       MouseIcon       =   "frmAbout.frx":38E3
       MousePointer    =   99  'Benutzerdefiniert
       TabIndex        =   7
-      Top             =   1395
+      Top             =   1275
       UseMnemonic     =   0   'False
       Width           =   4965
    End
@@ -217,7 +237,7 @@ Begin VB.Form frmAbout
    Begin VB.Label lblAbout 
       Alignment       =   2  'Zentriert
       BackStyle       =   0  'Transparent
-      Caption         =   "Biet-O-Matic (JARVIS-7)"
+      Caption         =   "Biet-O-Matic"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   13.5
@@ -323,6 +343,7 @@ With lblAbout(4) 'Spende
     End If
 End With
 lblAbout(5).Caption = gsarrLangTxt(213) & " : " & gsBOMUrlHP
+lblAbout(6).Caption = "JARVIS-7 - Verion  : " & GetJARVISVersion()
 lblAbout(7).Caption = "BOM - Version :   " & "V " & GetBOMVersion()
 lblAbout(8).Caption = gsarrLangTxt(217) & " :" & "   V " & GetKeywordsFileVersion()
 lblAbout(9).Caption = gsarrLangTxt(218) & " :" & " V " & GetLanguageFileVersion()

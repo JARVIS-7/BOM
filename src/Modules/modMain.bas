@@ -30,6 +30,7 @@ Private Sub Main()
 '...
 '...
 
+    
     glThreadID = App.ThreadID
     
     If (WeAreAlone() Or Command() = "" Or IsJobCommand()) Then
@@ -42,6 +43,7 @@ Private Sub Main()
         Call ProcessCmdline
     
     End If
+    
     
 End Sub
 
