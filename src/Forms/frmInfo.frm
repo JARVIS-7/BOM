@@ -113,6 +113,7 @@ End Sub
 Private Sub Form_Load()
     
     Call SetSize
+    WebBrowser1.Silent = True
     WebBrowser1.Navigate "about:blank"
     
 End Sub
@@ -180,3 +181,5 @@ Private Sub Form_Resize()
     Call WebBrowser1.Move(0, 0, Me.ScaleWidth, Me.ScaleHeight)
 
 End Sub
+
+

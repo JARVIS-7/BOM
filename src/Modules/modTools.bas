@@ -2014,7 +2014,7 @@ Public Sub ReadAllSettings()
     End If
     
     With oIni
-        gsToolTipSeparator = .GetValue("Diverses", "ToolTipSeparator", " • ")
+        gsToolTipSeparator = .GetValue("Diverses", "ToolTipSeparator", " " & Chr(127) & " ")
         gsReservedPriceMarker = .GetValue("Diverses", "ReservedPriceMarker", "%PRICE%*")
         gsSendItemTo = .GetValue("Diverses", "SendItemTo")
         gbSendItemEncrypted = .GetValue("Diverses", "SendItemEncrypted", "1")
@@ -2869,7 +2869,7 @@ Public Sub CheckUpdate(ByRef oFrm As Form, Optional bQuietOnUpToDate As Boolean 
         bVersionNotOk = True
     Else
         sTmp = gsTempPfad & "\bominfo.ini"
-        Call SaveToFile(sBuffer, sTmp)
+        Call SaveToFileAnsi(sBuffer, sTmp)
         Call INIGetValue(sTmp, "BOM", "VERSION", sNewBOMVersion)
         Call INIGetValue(sTmp, "KEY", "VERSION", sNewKeyVersion)
         Call INIGetValue(sTmp, "BOM", "FILE", sBOMDownloadUrl)
@@ -3767,7 +3767,7 @@ ERROR_HANDLER:
     
 End Function
 
-Public Sub SaveToFile_(sTxt As String, sFileName As String)
+Public Sub SaveToFileAnsi(sTxt As String, sFileName As String)
     
     On Error Resume Next
     

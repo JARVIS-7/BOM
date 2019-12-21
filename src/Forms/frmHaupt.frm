@@ -9133,7 +9133,7 @@ Private Sub ShowInfo_Timer()
                     
                     sKommando = sBuffer & sTmp
                     
-                    gsGlobalUrl = "http://" & gsScript4 & gsScriptCommand4 & sKommando
+                    gsGlobalUrl = "https://" & gsMainUrl & sKommando
                     frmInfo.Show
                     
                     If Not gsGlobalUrl = frmInfo.WebBrowser1.LocationURL Then

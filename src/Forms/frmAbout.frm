@@ -130,7 +130,7 @@ Begin VB.Form frmAbout
    End
    Begin VB.Label lblAbout 
       BackStyle       =   0  'Transparent
-      Caption         =   "Homepage : http://www.bid-o-matic.org"
+      Caption         =   "Web: http://www.bid-o-matic.org"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   9.75
@@ -342,11 +342,11 @@ With lblAbout(4) 'Spende
         Set .MouseIcon = lblAbout(5).MouseIcon
     End If
 End With
-lblAbout(5).Caption = gsarrLangTxt(213) & " : " & gsBOMUrlHP
-lblAbout(6).Caption = "JARVIS-7 - Verion  : " & GetJARVISVersion()
-lblAbout(7).Caption = "BOM - Version :   " & "V " & GetBOMVersion()
-lblAbout(8).Caption = gsarrLangTxt(217) & " :" & "   V " & GetKeywordsFileVersion()
-lblAbout(9).Caption = gsarrLangTxt(218) & " :" & " V " & GetLanguageFileVersion()
+lblAbout(5).Caption = gsarrLangTxt(213) & ": " & gsBOMUrlHP
+lblAbout(6).Caption = "JARVIS-7 - Version: " & GetJARVISVersion()
+lblAbout(7).Caption = "BOM - Version:   " & "V " & GetBOMVersion()
+lblAbout(8).Caption = gsarrLangTxt(217) & ":" & "   V " & GetKeywordsFileVersion()
+lblAbout(9).Caption = gsarrLangTxt(218) & ":" & " V " & GetLanguageFileVersion()
 '...
 btnOk.Caption = gsarrLangTxt(219)
 '...

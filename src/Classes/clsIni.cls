@@ -203,7 +203,7 @@ Public Function WriteIni(Optional sFileName As String) As Boolean
         
         sFileTmp = MakeTempFile()
         If sFileTmp > "" Then
-            Call SaveToFile(sTmp, sFileTmp)
+            Call SaveToFileAnsi(sTmp, sFileTmp)
             If Dir(sFileTmp) > "" Then
                 If FileLen(sFileTmp) > 0 Then
                     If Dir(msFileName) > "" Then Call Kill(msFileName)
