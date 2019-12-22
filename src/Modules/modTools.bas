@@ -37,7 +37,7 @@ Private Declare Function sndPlaySoundA Lib "winmm.dll" ( _
 Private Declare Function timeGetTime Lib "winmm.dll" () As Long
 
 'Shell- Calls
-Private Declare Function ShellExecute Lib "shell32.dll" _
+Public Declare Function ShellExecute Lib "shell32.dll" _
                     Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal _
                     lpOperation As String, ByVal lpFile As String, ByVal _
                     lpParameters As String, ByVal lpDirectory As String, _

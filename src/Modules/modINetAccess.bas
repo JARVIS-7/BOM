@@ -216,7 +216,7 @@ If Len(ShortPost) > 100 Then
   End If
 End If
 
-iRetries = 3
+iRetries = 2
 Do While iRetries > 0 And (ShortPost = "" Or (InStr(1, ShortPost, "<HTML", vbTextCompare) > 0 And InStr(1, ShortPost, "</HTML", vbTextCompare) <= 0))
   'Wenn Ergebnis leer oder ein <HTML aber kein </HTML vorhanden, dann nochmal versuchen, lg 03.04.2004
   If gbUseCurl Then

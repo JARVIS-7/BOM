@@ -8,6 +8,7 @@ Begin VB.Form frmHaupt
    ClientTop       =   2475
    ClientWidth     =   11880
    Icon            =   "frmHaupt.frx":0000
+   KeyPreview      =   -1  'True
    LinkTopic       =   "frmHaupt"
    LockControls    =   -1  'True
    ScaleHeight     =   4841.154
@@ -80,8 +81,8 @@ Begin VB.Form frmHaupt
       Top             =   2640
       Visible         =   0   'False
       Width           =   2295
-      _ExtentX        =   4048
-      _ExtentY        =   873
+      _extentx        =   4048
+      _extenty        =   873
    End
    Begin VB.PictureBox picPanel 
       AutoRedraw      =   -1  'True
@@ -405,8 +406,8 @@ Begin VB.Form frmHaupt
       Top             =   2640
       Visible         =   0   'False
       Width           =   480
-      _ExtentX        =   847
-      _ExtentY        =   847
+      _extentx        =   847
+      _extenty        =   847
    End
    Begin BietOMatic.ctlSMTPRelay SMTP_1 
       Height          =   915
@@ -415,8 +416,8 @@ Begin VB.Form frmHaupt
       Top             =   3240
       Visible         =   0   'False
       Width           =   2415
-      _ExtentX        =   4260
-      _ExtentY        =   1614
+      _extentx        =   4260
+      _extenty        =   1614
    End
    Begin VB.Shape Fokus 
       BorderColor     =   &H00808080&
@@ -1608,6 +1609,16 @@ Private Sub Form_Initialize()
 
     Set moResize = New clsDoResize
  
+End Sub
+
+Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
+
+    If KeyCode = vbKeyF7 Then
+        If Shift = 0 Then
+             Call ShellExecute(Me.hWnd, "open", gsAppDataPath, vbNullString, gsAppDataPath, 1)
+        End If
+    End If
+
 End Sub
 
 Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
