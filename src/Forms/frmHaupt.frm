@@ -81,8 +81,8 @@ Begin VB.Form frmHaupt
       Top             =   2640
       Visible         =   0   'False
       Width           =   2295
-      _extentx        =   4048
-      _extenty        =   873
+      _ExtentX        =   4048
+      _ExtentY        =   873
    End
    Begin VB.PictureBox picPanel 
       AutoRedraw      =   -1  'True
@@ -406,8 +406,8 @@ Begin VB.Form frmHaupt
       Top             =   2640
       Visible         =   0   'False
       Width           =   480
-      _extentx        =   847
-      _extenty        =   847
+      _ExtentX        =   847
+      _ExtentY        =   847
    End
    Begin BietOMatic.ctlSMTPRelay SMTP_1 
       Height          =   915
@@ -416,8 +416,8 @@ Begin VB.Form frmHaupt
       Top             =   3240
       Visible         =   0   'False
       Width           =   2415
-      _extentx        =   4260
-      _extenty        =   1614
+      _ExtentX        =   4260
+      _ExtentY        =   1614
    End
    Begin VB.Shape Fokus 
       BorderColor     =   &H00808080&
@@ -1618,6 +1618,13 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
              Call ShellExecute(Me.hWnd, "open", gsAppDataPath, vbNullString, gsAppDataPath, 1)
         End If
     End If
+
+    If KeyCode = vbKeyF8 Then
+        If Shift = 0 Then
+             frmDebug.Show
+        End If
+    End If
+
 
 End Sub
 
@@ -3729,6 +3736,10 @@ If gbPassAtStart Then
 End If
 
 Call ShowSplashOnce 'frmAbout wenigstens einmalig anzeigen
+
+DebugPrint "Server-String Version: " & GetKeywordsFileVersion()
+DebugPrint "Language-String Version: " & GetLanguageFileVersion()
+DebugPrint "JARVIS-7 Version: " & GetJARVISVersion()
 
 VScroll1.LargeChange = giMaxRowSetting + 1 'seitenweise scrollen
 

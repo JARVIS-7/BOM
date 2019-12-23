@@ -141,7 +141,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     
     'MD-Marker , 20090406
     WebBrowser1.Stop
-    
+        
     Unload Me: Set frmInfo = Nothing
     
 End Sub
