@@ -447,7 +447,13 @@ Public Function WinInetReadEx(sUrl As String, sPostData As String, sReferer As S
     DoEvents
     
     'Open a HTTP connection
-    hInternetOpen = InternetOpen(gsBrowserIdString, lProxyFlag, sProxy, vbNullString, 0)
+    If InStr(sUrl, "BOM") <> 0 Then
+        Dim userAgent As String
+        userAgent = "Biet-O-Matic " & GetBOMVersion()
+        hInternetOpen = InternetOpen(userAgent, lProxyFlag, sProxy, vbNullString, 0)
+    Else
+        hInternetOpen = InternetOpen(gsBrowserIdString, lProxyFlag, sProxy, vbNullString, 0)
+    End If
     
     If hInternetOpen <> 0 Then
     

@@ -4166,7 +4166,7 @@ Dim puLen     As Long
         Call VerQueryValue(sBuffer(0), "\", lplpBuffer, puLen)
         Call CopyMemory(udtVerBuffer, ByVal lplpBuffer, Len(udtVerBuffer))
         
-        GetFileVersion = udtVerBuffer.dwFileVersionMSh & "." & udtVerBuffer.dwFileVersionMSl & "." & udtVerBuffer.dwFileVersionLSh & "." & udtVerBuffer.dwFileVersionLSl
+        GetFileVersion = udtVerBuffer.dwFileVersionMSh & "." & udtVerBuffer.dwFileVersionMSl & "." & udtVerBuffer.dwFileVersionLSl
   
     End If
 End Function

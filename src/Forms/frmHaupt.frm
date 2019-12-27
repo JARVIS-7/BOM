@@ -81,8 +81,8 @@ Begin VB.Form frmHaupt
       Top             =   2640
       Visible         =   0   'False
       Width           =   2295
-      _ExtentX        =   4048
-      _ExtentY        =   873
+      _extentx        =   4048
+      _extenty        =   873
    End
    Begin VB.PictureBox picPanel 
       AutoRedraw      =   -1  'True
@@ -406,8 +406,8 @@ Begin VB.Form frmHaupt
       Top             =   2640
       Visible         =   0   'False
       Width           =   480
-      _ExtentX        =   847
-      _ExtentY        =   847
+      _extentx        =   847
+      _extenty        =   847
    End
    Begin BietOMatic.ctlSMTPRelay SMTP_1 
       Height          =   915
@@ -416,8 +416,8 @@ Begin VB.Form frmHaupt
       Top             =   3240
       Visible         =   0   'False
       Width           =   2415
-      _ExtentX        =   4260
-      _ExtentY        =   1614
+      _extentx        =   4260
+      _extenty        =   1614
    End
    Begin VB.Shape Fokus 
       BorderColor     =   &H00808080&
@@ -937,7 +937,7 @@ Option Explicit
 '
 'ModulLocals
 '
-Private Const mlMAXBIETVERSUCHE As Long = 5& 'Nur für Prozedur_Bieten
+Private Const mlMAXBIETVERSUCHE As Long = 3& 'Nur für Prozedur_Bieten
 
 Private mbEBayTimeIsSync As Boolean
 Private msScratch As String
@@ -1622,6 +1622,9 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
     If KeyCode = vbKeyF8 Then
         If Shift = 0 Then
              frmDebug.Show
+        End If
+        If Shift = vbCtrlMask Then
+             Call ShellExecute(Me.hWnd, "open", gsAppDataPath & "\History.log", vbNullString, gsAppDataPath, 1)
         End If
     End If
 
@@ -4175,11 +4178,11 @@ Do While lVersuch < mlMAXBIETVERSUCHE
   If oHtmlForm.GetFieldType(gsAnsBidField) = "text" Then oHtmlForm.PutField gsAnsBidField, sMaxGebot
   
   sServer = oHtmlForm.GetAction()             'wo müssen wir das Zeug hinschicken?
-  If Not sServer Like "http*" Then sServer = "http" & IIf(gbUseSSL, "s", "") & "://" & gsScript3 & IIf(sServer Like "/*", "", gsScriptCommand3) & sServer
-  If gbUseSSL Then
-    If Not sServer Like "https*" Then oHtmlForm.PutField gsAnsPassField, ""  'Passwort nie unverschlüsselt senden!
-    If Not sServer Like "https*" Then oHtmlForm.PutField gsAnsTokenField, ""  'Token nie unverschlüsselt senden!
-  End If
+'  If Not sServer Like "http*" Then sServer = "http" & IIf(gbUseSSL, "s", "") & "://" & gsScript3 & IIf(sServer Like "/*", "", gsScriptCommand3) & sServer
+'  If gbUseSSL Then
+'    If Not sServer Like "https*" Then oHtmlForm.PutField gsAnsPassField, ""  'Passwort nie unverschlüsselt senden!
+'    If Not sServer Like "https*" Then oHtmlForm.PutField gsAnsTokenField, ""  'Token nie unverschlüsselt senden!
+'  End If
   sKommando = oHtmlForm.GetFields(gsSiteEncoding) 'und welche Daten?
     
   sKommando = sKommando & oHtmlForm.ClickImage(gsAnsLoginSubmitImage1)
@@ -4206,7 +4209,9 @@ Do While lVersuch < mlMAXBIETVERSUCHE
         
         ' Wir wollen eine aktuelle Laufzeit haben und da wir grad noch Zeit haben, machen wir noch ein wenig Traffic
         If MyNow < DateAdd("s", -glVorlaufGebot, datEndeZeit) And Int(Timer) Mod 10 = 0 Then
-          Call ShortPost(Replace("http://" & gsScript4 & gsScriptCommand4 & gsCmdViewItem, "[Item]", sItem))
+            sServer = "https://" & gsMainUrl
+            sKommando = Replace(gsCmdViewItem, "[Item]", sItem)
+            Call ShortPost(sServer & sKommando, , , sEBayUser)
         End If
         
       Loop
@@ -6368,12 +6373,7 @@ Const iMaxUpdateVersuche As Integer = 3
    
         sServer = "https://" & gsMainUrl ' & gsScriptCommand4
     
-        sBuffer = ""
-    
-        sTmp = gsCmdViewItem
-        sTmp = Replace(sTmp, "[Item]", sItem)
-        
-        sKommando = sBuffer & sTmp
+        sKommando = Replace(gsCmdViewItem, "[Item]", sItem)
         
         If Not gbUseCurl Then bWait = True
         If Not gbConcurrentUpdates Then bWait = True
