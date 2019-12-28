@@ -13,7 +13,10 @@ Jarvis-7 ersetzt das von BOM bislang verwendete cURL.exe um mit den eBay-Servern
 Jarvis-7 ist nicht quelloffen und unterliegt einer proprietären Lizenz.
 
 Ein vollständiges Installationspaket finden Sie hier: https://ssl.schnapper.de/BOM/Biet-O-Matic_install.exe
+
 Eine bereits vorhandene Installation können Sie mit einem Updatepaket auf den aktuellen Stand bringen.
+
+Updatepakete finden Sie hier: https://github.com/JARVIS-7/BOM/releases
 
  
 
