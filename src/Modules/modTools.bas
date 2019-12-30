@@ -2847,7 +2847,7 @@ Public Sub CheckUpdate(ByRef oFrm As Form, Optional bQuietOnUpToDate As Boolean 
         End If
     End If
     
-    sTmp = gsBOMUrlSF & "/BOM/info.php"
+    sTmp = gsBOMUrlSF & "BOM/info.php"
     sBuffer = ShortPost(sTmp, "", , , , True)
     
     If sBuffer = "" Then
@@ -2871,19 +2871,19 @@ Public Sub CheckUpdate(ByRef oFrm As Form, Optional bQuietOnUpToDate As Boolean 
         sTmp = gsTempPfad & "\bominfo.ini"
         Call SaveToFileAnsi(sBuffer, sTmp)
         Call INIGetValue(sTmp, "BOM", "VERSION", sNewBOMVersion)
-        Call INIGetValue(sTmp, "KEY", "VERSION", sNewKeyVersion)
+        'Call INIGetValue(sTmp, "KEY", "VERSION", sNewKeyVersion)
         Call INIGetValue(sTmp, "BOM", "FILE", sBOMDownloadUrl)
-        Call INIGetValue(sTmp, "KEY", "FILE", sKeyDownloadUrl)
+        'Call INIGetValue(sTmp, "KEY", "FILE", sKeyDownloadUrl)
         Call INIGetValue(sTmp, "COMMON", "DOWNLOAD", sBasicUrl)
-        Call INIGetValue(sTmp, "BOM_Beta", "VERSION", sNewBetaVersion)
-        Call INIGetValue(sTmp, "BOM_Beta", "FILE", sBetaDownloadUrl)
+        'Call INIGetValue(sTmp, "BOM_Beta", "VERSION", sNewBetaVersion)
+        'Call INIGetValue(sTmp, "BOM_Beta", "FILE", sBetaDownloadUrl)
         Call Kill(sTmp)
         
         sBOMDownloadUrl = sBasicUrl & "/" & sBOMDownloadUrl
-        sKeyDownloadUrl = sBasicUrl & "/" & sKeyDownloadUrl
-        sBetaDownloadUrl = sBasicUrl & "/" & sBetaDownloadUrl
+        'sKeyDownloadUrl = sBasicUrl & "/" & sKeyDownloadUrl
+        'sBetaDownloadUrl = sBasicUrl & "/" & sBetaDownloadUrl
         
-        If sNewBOMVersion = "" Or sNewKeyVersion = "" Then
+        If sNewBOMVersion = "" Then
             sMsg = gsarrLangTxt(260) _
                 & vbCrLf & gsarrLangTxt(258) _
                 & vbCrLf & vbCrLf & "URL: " & gsBOMUrlHP & vbCrLf & vbCrLf _
@@ -2891,12 +2891,12 @@ Public Sub CheckUpdate(ByRef oFrm As Form, Optional bQuietOnUpToDate As Boolean 
             bVersionNotOk = True
         Else
         
-            If gbCheckForUpdateBeta And VersionValue(sNewBetaVersion) > VersionValue(sNewBOMVersion) Then
-                sNewBOMVersion = sNewBetaVersion
-                sBOMDownloadUrl = sBetaDownloadUrl
-                bIsBeta = True
-                sUpdaterParamBeta = " /BETA"
-            End If
+'            If gbCheckForUpdateBeta And VersionValue(sNewBetaVersion) > VersionValue(sNewBOMVersion) Then
+'                sNewBOMVersion = sNewBetaVersion
+'                sBOMDownloadUrl = sBetaDownloadUrl
+'                bIsBeta = True
+'                sUpdaterParamBeta = " /BETA"
+'            End If
             
             If VersionValue(sOldBOMVersion) >= VersionValue(sNewBOMVersion) Then
                 If VersionValue(sOldKeyVersion) >= VersionValue(sNewKeyVersion) Then
@@ -2907,14 +2907,14 @@ Public Sub CheckUpdate(ByRef oFrm As Form, Optional bQuietOnUpToDate As Boolean 
                         Exit Sub
                     End If
                 Else
-                    'KEY nachladen ..
-                    bVersionNotOk = True
-                    sAvailableRessource = gsarrLangTxt(417) & " " & sNewKeyVersion
-                    sMsg = gsarrLangTxt(402) & vbCrLf & vbCrLf _
-                        & gsarrLangTxt(403) & ":" & vbTab & sOldKeyVersion & vbTab & vbCrLf _
-                        & gsarrLangTxt(404) & ":" & vbTab & sNewKeyVersion & vbCrLf & vbCrLf _
-                        & gsarrLangTxt(265)
-                    If sKeyDownloadUrl <> "" Then sOpenUrl = sKeyDownloadUrl
+'                    'KEY nachladen ..
+'                    bVersionNotOk = True
+'                    sAvailableRessource = gsarrLangTxt(417) & " " & sNewKeyVersion
+'                    sMsg = gsarrLangTxt(402) & vbCrLf & vbCrLf _
+'                        & gsarrLangTxt(403) & ":" & vbTab & sOldKeyVersion & vbTab & vbCrLf _
+'                        & gsarrLangTxt(404) & ":" & vbTab & sNewKeyVersion & vbCrLf & vbCrLf _
+'                        & gsarrLangTxt(265)
+'                    If sKeyDownloadUrl <> "" Then sOpenUrl = sKeyDownloadUrl
           
                 End If
             Else
@@ -2957,40 +2957,54 @@ Public Sub CheckUpdate(ByRef oFrm As Form, Optional bQuietOnUpToDate As Boolean 
     End If
     
     If bVersionNotOk Then
-        lRet = 0
-        If gbNewBOMVersionAvailable Then
-            'Updater starten (NoAsk, Backup On, startet BOM - beendet sich)
-            lRet = ExecuteDoc(oFrm.hWnd, "BOMUpdate.exe", "/MODE=AN /Backup=B /DONE=SQ" & sUpdaterParamBeta, True)
-        End If
+'        lRet = 0
+'        If gbNewBOMVersionAvailable Then
+'            'Updater starten (NoAsk, Backup On, startet BOM - beendet sich)
+'            lRet = ExecuteDoc(oFrm.hWnd, "BOMUpdate.exe", "/MODE=AN /Backup=B /DONE=SQ" & sUpdaterParamBeta, True)
+'        End If
+'
+'        If lRet Then
+'            'Updater existiert und ist gestartet
+'
+'            'lieber nochmal Artikel sichern ..
+'            Call WriteArtikelCsv2
+'
+'            'Subclassing entfernen
+'            If Not InDevelopment Then
+'                Call modSubclass.UnSubclass(frmDummy.hWnd)
+'                If gbWheelUsed Then
+'                    frmHaupt.MWheel1.DisableWheel
+'                End If
+'            End If
+'
+'            'Icon entfernen
+'            oFrm.RemoveTrayIcon
+'
+'            'und wech, den Rest macht der Updater
+'            End
+'
+'        Else
         
-        If lRet Then
-            'Updater existiert und ist gestartet
-            
-            'lieber nochmal Artikel sichern ..
-            Call WriteArtikelCsv2
-            
-            'Subclassing entfernen
-            If Not InDevelopment Then
-                Call modSubclass.UnSubclass(frmDummy.hWnd)
-                If gbWheelUsed Then
-                    frmHaupt.MWheel1.DisableWheel
-                End If
+        'alte Methode
+        Screen.MousePointer = vbHourglass
+        Kill gsAppDataPath & "\DoUpdate.exe"
+        
+        GetPageToFile sOpenUrl, gsAppDataPath & "\DoUpdate.exe"
+        
+        Call WriteArtikelCsv2
+        'Subclassing entfernen
+        If Not InDevelopment Then
+            Call modSubclass.UnSubclass(frmDummy.hWnd)
+            If gbWheelUsed Then
+                frmHaupt.MWheel1.DisableWheel
             End If
-            
-            'Icon entfernen
-            oFrm.RemoveTrayIcon
-            
-            'und wech, den Rest macht der Updater
-            End
-            
-        Else
-            'alte Methode
-            gsGlobalUrl = sOpenUrl
-            'Load frmBrowser
-            'frmBrowser.WebBrowser1.Silent = False
-            'Call ShowBrowser(frmHaupt.hWnd)
-            Call ExecuteDoc(oFrm.hWnd, gsGlobalUrl)
         End If
+
+        'Icon entfernen
+        oFrm.RemoveTrayIcon
+        ShellExecute 0, "Open", gsAppDataPath & "\DoUpdate.exe", "/S", "", 1
+        
+       End
     End If
     
     If gbUsesModem And gbLastDialupWasManually Then oFrm.Ask_Offline
@@ -4169,4 +4183,17 @@ Dim puLen     As Long
         GetFileVersion = udtVerBuffer.dwFileVersionMSh & "." & udtVerBuffer.dwFileVersionMSl & "." & udtVerBuffer.dwFileVersionLSl
   
     End If
+End Function
+
+Public Function maskString(stringToMask) As String
+    
+    maskString = stringToMask
+    
+    ' = durch ¥¥¥ ersetzen
+    maskString = Replace(maskString, "=", Chr(165) & Chr(165) & Chr(165))
+    ' Leerzeichen durch ±±± ersetzen
+    maskString = Replace(maskString, " ", Chr(177) & Chr(177) & Chr(177))
+    ' " durch ÐÐÐ ersetzen
+    maskString = Replace(maskString, """", Chr(208) & Chr(208) & Chr(208))
+    
 End Function

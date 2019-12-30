@@ -1,0 +1,1078 @@
+
+Änderungen von 2.14.15 -> 2.14.16 (2018-08-17)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Verschachtelte HTML-Forms korrekt behandeln.
+Fix: Login-Erkennung bei Zwischenseite nach Anmeldung erkennen.
+Fix: Beendete Artikel werden mit ähnlichen ersetzt.
+
+
+==============================================================================
+
+
+
+Änderungen von 2.14.14 -> 2.14.15 (2018-07-31)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Script3 statt 5 für letzten Bietschritt bei relativen URLs.
+Fix: Separates Status-File nur im ersten Bietversuch schreiben.
+Fix: IE-Cookies stillgelegt, machen Ärger beim Bieten mit mehreren Accounts.
+Fix: Bei absoluten lokalen Adressen das Einfügen von gsScriptCommand3 unterdrücken.
+Fix: UTF für eBay.
+
+
+==============================================================================
+
+
+
+Änderungen von 2.14.13 -> 2.14.14 (2016-03-06)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: HTML-Zeitsync.
+
+
+==============================================================================
+
+
+
+Änderungen von 2.14.12 -> 2.14.13 (2016-02-23)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Drag & Drop
+Fix: Login-Erkennung verbessert.
+
+
+==============================================================================
+
+
+
+Änderungen von 2.14.11 -> 2.14.12 (2012-11-28)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Gelöschte Artikel beim Minimieren
+
+
+==============================================================================
+
+
+Änderungen von 2.14.10 -> 2.14.11 (2012-11-28)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Artikelstandort
+Fix: Titel bei .fr
+Fix: Angaben bei abgelaufenen Artikeln.
+Fix: Artikel bei Löschen der Artikelnummer sofort entfernen.
+Fix: Usernamen mit Leerzeichen zulassen.
+
+
+==============================================================================
+
+
+Änderungen von 2.14.9 -> 2.14.10 (2012-11-11)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Curl liefert keine Daten wenn zu schnell / zu oft gestartet.
+Fix: Anzahl Gebote
+
+
+==============================================================================
+
+
+Änderungen von 2.14.8 -> 2.14.9 (2012-11-03)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Absturz bei Artikel hinzufügen während Bieten läuft.
+Fix: Titel auf max. 300 Zeichen begrenzen.
+Fix: Einlesen Endzeit, Titel und Standort.
+Fix: Pop ging aus falls einmal fehlerhaft.
+Fix: Pop beim Start vor Ende-Prüfung machen.
+Fix: Währungsupdate
+
+Feature: Mehrere eMail-Empfänger durch Semikolon trennen.
+
+
+==============================================================================
+
+
+Änderungen von 2.14.7 -> 2.14.8 (2010-10-10)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Einloggen bei egun.de
+Fix: Einlesen der Merkliste von hood.de
+
+
+==============================================================================
+
+
+Änderungen von 2.14.6 -> 2.14.7 (2010-09-07)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Endzeit bei ebay.fr
+
+
+==============================================================================
+
+
+Änderungen von 2.14.5 -> 2.14.6 (2010-07-29)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Mailsteuerung über eMail an Freund.
+Fix: Erkennung neue rover-Links.
+
+
+==============================================================================
+
+
+Änderungen von 2.14.4 -> 2.14.5 (2010-07-21)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Nachkommastellen in Jetzt-Bieten-Abfrage.
+Fix: Bietet bei eGun zu früh.
+
+Feature: Sicherheitsabfrage bei Aktivierung Sofort-Kaufen.
+Feature: Artikelfenster beim Programmstart öffnen.
+Feature: Anzeige des gerade einloggenden Users.
+
+
+==============================================================================
+
+
+Änderungen von 2.14.3 -> 2.14.4 (2010-07-13)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Totale Fensterminimierung.
+Fix: Dauerhaft entladene Artikelzeilen.
+Fix: Busy-Waiting POP/NTP.
+Fix: Falsche Währung in POP-Quittung.
+
+Feature: Mehrere Mailkommandos durch | trennen.
+
+
+==============================================================================
+
+
+Änderungen von 2.14.2 -> 2.14.3 (2010-06-13)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Absturz beim Beenden.
+Fix: Artikelzugriff gescheitert vs. Endzeit 11.11.2111.
+
+
+==============================================================================
+
+
+Änderungen von 2.14.1 -> 2.14.2 (2010-06-12)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Artikelzugriff gescheitert.
+
+
+==============================================================================
+
+
+Änderungen von 2.14.0 -> 2.14.1 (2010-06-08)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Artikelzugriff gescheitert bei ebay.it
+Fix: Discount-Preis bei ebay.com
+
+
+==============================================================================
+
+
+Änderungen von 2.12.9 -> 2.14.0 (2010-05-29)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Gebot nicht fett überarbeitet.
+Fix: Mailsteuerung bei POP-Fehler nicht mehr deaktivieren.
+Fix: Probleme mit SNTP-Zeitsync.
+Fix: Mindestpreis nicht erreicht.
+Fix: Verkäuferbewertung.
+Fix: Loginstatus wird nicht erkannt.
+
+Feature: 5-Minuten-Beep konfigurierbar.
+Feature: Rückfrage vor Zurücksetzen von Status Cancel.
+Feature: Gelöschte Artikel dauerhaft löschen.
+Feature: BOM per Mailsteuerung ausschalten.
+Feature: Alle Artikel löschen.
+Feature: Beendete Artikel blockieren.
+Feature: Sofortkauf-Artikel blockieren.
+Feature: Mailsteuerung nur mit Username.
+
+
+==============================================================================
+
+
+Änderungen von 2.12.8 -> 2.12.9 (2010-05-02)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Neue Artikel-URL bei Suchseiten.
+
+
+==============================================================================
+
+
+Änderungen von 2.12.7 -> 2.12.8 (2010-05-01)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Leerzeichen in URL bei Hinzufügen über Browser-Plugin.
+
+
+==============================================================================
+
+
+Änderungen von 2.12.6 -> 2.12.7 (2010-01-24)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Bewertung.
+Fix: Alternative Versandkosten.
+Fix: Versandkosten mit "..." abkürzen falls zu lang.
+Fix: Kein Loginversuch wenn User oder Passwort leer.
+Fix: Sofort-Kauf-Status in Status-Mail (Mailsteuerung).
+Fix: Betreff Quittungsmail vereinheitlicht.
+Fix: Splash-Screen verdeckt Fehlermeldung beim Start.
+Fix: -Gruppen
+
+
+==============================================================================
+
+
+Änderungen von 2.12.5 -> 2.12.6 (2009-12-02)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Bieten bei egun.
+Fix: Mailsteuerung über eMail an Freund.
+Fix: Endzeit bei 'bay.it.
+
+
+==============================================================================
+
+
+Änderungen von 2.12.4 -> 2.12.5 (2009-10-14)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Fehlerhafte Anmeldung.
+
+
+==============================================================================
+
+
+Änderungen von 2.12.3 -> 2.12.4 (2009-08-26)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Splash-Screen-Logo zu blass.
+Fix: Splash-Screen verdeckt Fehlermeldung beim Start.
+Fix: Endzeit bei 'bay.it.
+
+
+==============================================================================
+
+
+Änderungen von 2.12.2 -> 2.12.3 (2009-08-07)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Fehler in UTF8-Decode.
+
+
+==============================================================================
+
+
+Änderungen von 2.12.1 -> 2.12.2 (2009-08-06)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Anzahl Gebote einlesen.
+Fix: motors-Artikel.
+
+
+==============================================================================
+
+
+Änderungen von 2.12.0 -> 2.12.1 (2009-07-30)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: HTML-Zeitsync auf 'bay.fr
+Fix: Anzahl Gebote einlesen.
+Fix: Bewertung einlesen.
+Fix: Tausender-Trenner an der falschen Stelle macht zu hohe Beträge.
+Fix: Alle Zeilen bis auf eine verschwunden bei zu schnellem Klick auf Trayicon.
+Fix: STRG-A im Kommentarfenster.
+
+
+==============================================================================
+
+
+Änderungen von 2.10.1 -> 2.12.0 (2009-07-27)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Automatische Sommerzeit-Erkennung.
+Fix: Resuspend auch wenn Aktionsendemails nicht aktiviert sind.
+Fix: Bieten bei Hood wenn mehrere Versandoptionen angeboten werden.
+Fix: Mehrere Versuche wenn Artikelseite in falschem Format kommt.
+Fix: Fehlende Toolbar-Tooltips übersetzt und aussagekräftiger gemacht.
+Fix: Beim Einlesen der beobachteten Artikel die beendeten weglassen.
+Fix: Anzahl 0 bei 'mehr als x'-Angaben.
+Fix: Leerzeichen in Username beibehalten.
+Fix: Sanduhr bei Warten auf Tokeneingabe.
+Fix: Neue Artikelseite mit neuen ServerStrings einlesen.
+Fix: HTML-Sonderzeichen ersetzen.
+Fix: Drag&Drop auf Usernamen im NeuerArtikel-Fenster.
+Fix: Nach Userinteraktion den aktuellen Artikelindex bestimmen.
+Fix: Eingetragenes Gruppe und Gebot verschwinden beim Scrollen per Keyup/down.
+Fix: Sofortkauf erkennen wenn Artikel beim Einfügen bereits abgelaufen ist.
+Fix: Ständiger Aufruf von ExtCmdPeriodicCmd wenn ExtCmdPeriodicTime = 0.
+Fix: Mehrfache Kommata in Standort.
+Fix: Splash-Screen eher und nicht mehr modal anzeigen.
+Fix: Artikelnummern im Automode nicht mehr sperren.
+
+Feature: Wheelmouse-Handling verbessert.
+Feature: Hibernate statt Suspend.
+Feature: Prüfung der Ländereinstellungen auf Probleme.
+Feature: Klick auf Trayicon minimiert falls vorher sichtbar.
+Feature: Kommentarfenster überarbeitet.
+Feature: Artikelliste regelmäßig als CSV versenden.
+
+
+==============================================================================
+
+
+Änderungen von 2.10.0 -> 2.10.1 (2009-01-18)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Probleme beim Einloggen mit BOM-eigenen Cookies
+
+
+==============================================================================
+
+
+Änderungen von 2.8.3 -> 2.10.0 (2009-01-03)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Umgehung von 'bays neuen Artikelseiten.
+Fix: Einlesen von Mein 'bay BETA.
+Fix: Eingegebenes Gebot geht beim Start des externen Browsers verloren.
+Fix: Artikel mit geänderten Endzeiten wieder richtig einsortieren.
+Fix: Doppelte Usernamen verbieten.
+Fix: Gewonnen-Erkennung.
+Fix: Falscher-User-Erkennung bei Sofort-Kaufen.
+Fix: Absender-Test mit Wildcards.
+Fix: Readcsv-Antwortmail separat schicken.
+Fix: Diverse Fixes für die Mailsteuerung.
+
+Feature: Suspend per Mail.
+Feature: Icons anpassbar.
+Feature: Versionsnummer in Titelzeile.
+Feature: Wechselnde Tray-Icons.
+Feature: Suchbegriffe für externe Tools nachbearbeiten (für Tippfehler-Suche).
+Feature: Kommentar im NeuerArtikel-Fenster.
+Feature: Felder im NeuerArtikel-Fenster in beliebiger Reihenfolge anordnen.
+Feature: Endzeit bei Zeitzonenwechsel automatisch anpassen.
+Feature: Job-Interface erweitert.
+Feature: Logging bei mehreren Instanzen verbessert.
+Feature: Release Notes im Menü verlinkt.
+Feature: Gelöschte Artikel in Logdatei schreiben.
+Feature: Antwortmails verschlüsseln.
+
+
+==============================================================================
+
+
+Änderungen von 2.8.2 -> 2.8.3 (2008-10-26)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Status Hold wurde nicht aufgehoben.
+Fix: HTML-Logfiles nach Anwendungsdaten speichern.
+Fix: Ungewolltes BOM-Update bei Ablauf des Countdowns.
+Fix: Versandkosten einlesen.
+Fix: Absturz bei gleichzeitig Aktualisieren.
+Fix: AutoUpdater startet obwohl keine Updateinfos geholt werden konnten.
+
+
+==============================================================================
+
+
+Änderungen von 2.8.1 -> 2.8.2 (2008-08-11)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Powermanagement überarbeitet.
+Fix: Einfrieren bei Internetzugriffsproblemen.
+
+
+==============================================================================
+
+
+Änderungen von 2.8.0 -> 2.8.1 (2008-08-03)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Kaputte Darstellung bei ungültigen Anzeigeeinstellungen.
+Fix: Herunterfahren nach letzter Auktion.
+Fix: InlineBrowser nicht mehr sichtbar.
+Fix: Gebotserkennung Italien.
+Fix: Bewertung einlesen.
+Fix: UTF-8-Dekodierung vs. Spracheinstellung für nicht-Unicode-Programme.
+Fix: Einlesen leerer Artikel beim Start.
+Fix: Leerzeile am Ende der Artikel.csv.
+Fix: Leerzeichen in Artikelnummernaufzählung beim Hinzufügen ignorieren.
+Fix: Versandkosten ohne Währung speichern.
+Fix: Mehrfacher Start über Firefox-Plugin.
+
+
+==============================================================================
+
+
+Änderungen von 2.6.2 -> 2.8.0 (2008-05-13)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Drag&Drop überarbeitet.
+Fix: GDI-Leak unter Vista.
+Fix: Vollgelaufenes Log bei bestimmter Artikelsortierung.
+Fix: Nach Wakeup ein wenig warten, bis das Netzwerk bereit ist.
+Fix: Sommerzeitumstellung bei Sites ohne Zeitzonenangabe.
+Fix: Artikelupdate wenn keine Daten.
+Fix: HTML-Zeitsync wenn Wochentag-Kürzel gleich Monatskürzel.
+Fix: Behandlung geringfügig negativer Fensterpositionen.
+Fix: Hinweisseite blockiert Bietvorgang.
+
+Feature: Support für Hood.de
+Feature: Support für eGun.de
+Feature: Mehrere Artikel gleichzeitig aktualisieren.
+Feature: Erweiterte Gruppenabhängigkeiten.
+Feature: Automatisch aktualisieren nach manuellem Gebot.
+Feature: Keine Popup-Meldung nach manuellem Gebot.
+Feature: Lesen und Schreiben der Einstellungen beschleunigt.
+Feature: Zeilencursor.
+Feature: Zyklische Updateprüfung.
+Feature: Externe Kommandos zeitgesteuert ausführen.
+Feature: Größe des Neuer-Artikel-Fensters einstellbar.
+Feature: Wochentag in Datumsformat einstellbar.
+Feature: Anonymisierten Namen des anonymen Bieters auslesen.
+Feature: Neues Tool: Artikel per Mail verschicken.
+Feature: Neues Tool: Artikel in die Zwischenablage kopieren.
+Feature: Neuer-Artikel-Fenster behält optional die Werte bei.
+Feature: Inline-Browser nur bei gedrückter Zusatztaste.
+Feature: Größe des Inline-Browsers anpassbar.
+Feature: Alle abgebrochenen Artikel entfernen.
+
+
+==============================================================================
+
+
+Änderungen von 2.6.1 -> 2.6.2 (2008-04-18)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Automatische UTF-8-Dekodierung.
+Fix: cURL vs. Proxy.
+
+
+==============================================================================
+
+
+Änderungen von 2.6.0 -> 2.6.1 (2008-03-02)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: BOM stiehlt Fokus beim Einfügen über Neuer-Artikel-Fenster.
+Fix: Verschobenes, grün hinterlegtes Versandkostenfeld.
+Fix: Verhunderfachte Versandkosten.
+
+
+==============================================================================
+
+
+Änderungen von 2.4.1 -> 2.6.0 (2008-03-01)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Gebot nach Entfernen sofort übernehmen.
+Fix: Verschlüsselte Mailsteuerungsbefehle auch zulassen wenn nicht gefordert.
+Fix: Abgelaufene Artikel entfernen beschleunigt.
+Fix: Laden und Speichern beschleunigt.
+Fix: Auktionsende-Mail auch bei Sofortkauf verschicken.
+Fix: Fehler in Passwort-Codierung bei Sonderzeichen.
+Fix: Sofort-Kauf wird nicht gecancelt.
+Fix: Leere Artikelliste bei langsamem Systemstart.
+Fix: Runterfahren trotz Auktionen bei langsamem Systemstart.
+Fix: Leerzeichen bei Drag&Drop verdoppelt Artikel.
+Fix: Kleinere Änderungen für bessere Wine-Kompatibilität.
+Fix: Verbesserte Datumskonvertierung.
+Fix: Nicht lokalisierte Texte.
+Fix: Steuerung über eMail an Freund angepaßt.
+Fix: Verlängerte Anzeige/Sofortkauf-Artikel mit roter Restzeit.
+Fix: Vorlaufzeiten gegeneinander prüfen.
+Fix: Währungsupdate angepaßt.
+Fix: Leere Artikel.csv nach verspäteter Passworteingabe beim Start.
+Fix: Artikel-Update-Timer während manuellem Update anhalten und zurücksetzen.
+Fix: Erneuter Loginversuch bei Beobachtete Artikel lesen.
+Fix: Plausibilitätsprüfung bei Anzahl Zeilen und Zeilenhöhe.
+Fix: Nachfrage beim Speichern obwohl keine Änderung.
+
+Feature: Fortschrittsanzeige.
+Feature: Delegieren-Mail verschlüsseln.
+Feature: Inline-Browser.
+Feature: Erkennung anonymer Bieter.
+Feature: Beobachtete Artikel mit mein'bay abgleichen.
+Feature: Kommentare aus mein'bay einlesen.
+Feature: Steuerung über Kommandozeilenparameter.
+Feature: Versandkosten im eigenen Feld bearbeiten.
+Feature: Mindestpreis nicht erreicht anzeigen.
+Feature: Angebot überarbeitet anzeigen.
+Feature: Auktions-Ende-Mail jetzt komplett anpassbar.
+Feature: Gebot Gruppe und User im Fenster NeueArtikel eingeben.
+Feature: Standby verhindern / zeitgesteuert wieder aufwecken.
+Feature: Wieder schlafen legen falls zeitgesteuert aufgeweckt.
+Feature: Browser bei Klick auf Beschreibung abschaltbar.
+Feature: Kommentar in Titel anzeigen.
+Feature: HTTP-Zugriffe über cURL abwickeln.
+Feature: ServerStrings für motors automatisch wechseln.
+Feature: Ignorieren von Fehlern in der Artikel.csv.
+Feature: Mail bei Gebot zu niedrig.
+
+
+==============================================================================
+
+
+Änderungen von 2.4.0 -> 2.4.1 (2007-09-10)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Fehler in Datumsroutine.
+
+
+==============================================================================
+
+
+Änderungen von 2.3.0 -> 2.4.0 (2007-09-05)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Rücksetzen der Scrollleiste beim Verlassen Gebots-/Gruppenfeld.
+Fix: Rücksetzen der Scrollleiste nach Einlesen von mein 'bay.
+Fix: Zeitsync-Fehlermeldung beim Start blockiert Automode.
+Fix: Bieten mit Nicht-Standard-User.
+Fix: Crash bei Klick auf Endzeit beim Eingefügen eines Artikels.
+Fix: Höchstbieterkennzeichnung bei Nicht-Standard-User.
+Fix: Rücksetzen von Nicht gefunden.
+Fix: Veraltetes Format bei Artikel.csv per Mail senden.
+Fix: GDI-Leck unter Vista umgehen.
+Fix: Probleme mit Zeitzonen mit halben Stunden.
+Fix: Datumsprobleme bei fr.
+Fix: Verbesserte Sofort-Kauf-Erkennung.
+Fix: Artikel auch einlesen wenn Endzeit nicht vorhanden.
+Fix: HTML-Zeitsync auf neue Zeitseite umgestellt.
+
+Feature: Verkäufer-Bewertung auslesen.
+Feature: Artikelstandort auslesen.
+Feature: Preis-Tooltip-Trennzeichen einstellbar.
+Feature: Scrollbar-Position merken.
+Feature: Löschen von Artikeln optional bestätigen.
+Feature: Artikel an anderen BOM delegieren.
+Feature: Mail SSL Support über stunnel.org.
+Feature: Sofort-Kaufen.
+Feature: Auktionstitel und Useraccount in Mailquittung.
+Feature: Markierung von Kommentaren.
+Feature: Suchen in der Artikelliste.
+Feature: Ladegeschwindigkeit der Sprachdatei verbessert.
+Feature: Mehrere Artikelnummern im Neue-Artikel-Fenster entgegennehmen.
+Feature: Aufräumen der Tempfiles beim Löschen eines Artikels.
+Feature: History.log automatisch verkleinern.
+Feature: Verschlüsselung von Mailsteuerung.
+Feature: Farbl. Markierung Gebotsfeld jetzt permanent.
+Feature: Erkennung von Anzeigenformat.
+Feature: Versionsprüfung erkennt jetzt auch Beta-Versionen.
+
+
+==============================================================================
+
+
+Änderungen von 2.2.0 -> 2.3.0 (2007-04-04)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Steuerung über eMail an Freund angepaßt.
+Fix: Einwahl überarbeitet.
+Fix: Errorhandling für SNTP.
+Fix: Leerzeichen in Rückantwortadresse bei Mailsteuerung.
+
+Feature: Account per Mailsteuerung setzen.
+Feature: Drag&Drop aufs gesamte Hauptfenster erweitert.
+Feature: Zeitsync auch ohne Adminrechte.
+Feature: Cookie-Verwaltung unabhängig vom IE möglich.
+Feature: Cookie-Verwaltung pro User (wenn Cookie-Verwaltung unabhängig vom IE), dadurch gleichzeitge Anmeldung möglich.
+Feature: HTTP-Timeout einstellbar.
+Feature: Unterstützung für Sicherheitsschluessel.
+Feature: Artikel, Einstellungen usw. werden unter Anwendungsdaten abgelegt.
+Feature: Verkettung von Bietgruppen.
+Feature: Produktsuche/Tools im Kontextmenü.
+
+
+==============================================================================
+
+
+Änderungen von 2.1.0 -> 2.2.0 (2006-12-16)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Leerzeichen aus Zeitserver entfernen.
+Fix: Modem Einwahl überarbeitet.
+Fix: Artikelnummer auf Ziffern filtern.
+Fix: Deutsche Übersetzung von Fontgröße.
+Fix: Gebote unter 1,- annehmen.
+Fix: BOM-Homepage angepasst.
+Fix: Neues xbay-Layout.
+Fix: Abholen aller Mailaufträge.
+Fix: Steuerung über eMail an Freund angepaßt.
+Fix: 0-Preis in Auktions-Ende-Mail.
+
+Feature: Biet-Jobs von der Kommandozeile aus starten.
+Feature: Erkennung von 'Verkäufer abwesend'.
+Feature: ServerStrings auswählbar.
+Feature: SNTP-Zeitabgleich.
+
+
+==============================================================================
+
+
+Änderungen von 2.0.30 -> 2.1.0 (2006-06-12)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Einlesen von Mein 'bay bei bestimmten Layouts.
+Fix: Sofort-Kauf-Aktionen werden nicht aktualisiert.
+Fix: Überboten statt Fehler im Status.
+Fix: Versandkosten: Keine.
+Fix: Behandlung von Zeilenumbrüchen in Artikel.csv.
+Fix: Absturz bei Vorlauf>64k.
+Fix: Login-Test funktioniert nicht bei abgeschalteter Toolbar.
+Fix: Reset letzter Artikel / z.B. kein Update n. Ende.
+Fix: Behandlung von UTF8-kodierten Mails.
+Fix: Mailsteuerung (Leerzeichen bei Zeilenfortsetzung Subject).
+Fix: Absturz bei nicht numerischen Werten numerischen Feldern in den Settings.
+Fix: Nicht lokalisierte Spaltenüberschriften-Tooltips.
+Fix: NTP-Timeout angepaßt (3 Sek.)
+Fix: Update nach Ende und Nicht-Gewonnen-Mail bei Artikel ohne Gebot.
+Fix: Führendes Leerzeichen in Mail-Betreff entfernt.
+
+Feature: Hinzufügen mehrerer Auktionen per Drag&Drop.
+Feature: Neue Timing-Funktion für exakteres Bieten.
+Feature: Einloggen, falls 'bay das für Artikelupdate verlangt. 
+Feature: Lokale Versandkosten alternativ zu den Standard-Versandkosten lesen.
+Feature: Preis und Währung getrennt in Auktions-Ende-Mail-Betreff.
+Feature: Artikelbezeichnung in Auktions-Ende-Mail-Betreff.
+
+
+==============================================================================
+
+
+Änderungen von 2.0.29 -> 2.0.30 (2006-03-29)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Email-Steuerung über Email an Freund
+Fix: Sortierreihenfolge geht nach Neustart verloren
+Fix: 1 x Sofortkauf = immer Sofortkauf
+Fix: Update nach Ende auch bei Status Error
+Fix: Leerzeichen aus Usernamen entfernen
+Fix: Neues xbay-Layout
+
+
+==============================================================================
+
+
+Änderungen von 2.0.28 -> 2.0.29 (2005-10-14)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Bieten: Status Fehler und Einlog- bzw. Bestätigungsseite popt auf.
+Fix: Gewonnen-Erkennung bei Powerauktionen.
+Fix: Geschwindigkeitstest läuft ewig.
+
+
+==============================================================================
+
+
+Änderungen von 2.0.27 -> 2.0.28 (2005-10-10)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Bietvorgang überarbeitet.
+Fix: Login auf .com geht nicht.
+Fix: Lesen der beobachteten Artikel mit mehreren Usern.
+Fix: Höchstbieter bei .com wird nicht richtig ermittelt.
+Fix: Preise bei Immobilien werden nicht ermittelt.
+Fix: Fensterposition wird bei Mehrbildschirmbetrieb nicht gespeichert.
+Fix: Option "Aktualisieren bis x Minuten vor Auktion" wird nicht gespeichert.
+
+
+==============================================================================
+
+
+Änderungen von 2.0.26 -> 2.0.27 (2005-09-26)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Sofort-Kauf-Kombi-Erkennung.
+
+
+==============================================================================
+
+
+Änderungen von 2.0.25 -> 2.0.26 (2005-09-25)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Versandkosten bei .com werden nicht erkannt.
+Fix: Höchstbieter bei .com wird nicht richtig ermittelt.
+Fix: Endzeit bei .com wird nicht richtig ermittelt.
+Fix: Preis bei .co.uk wird nicht erkannt.
+Fix: Absturz wegen Element 'x' des Steuerelementfelds existiert nicht.
+
+
+==============================================================================
+
+
+Änderungen von 2.0.24 -> 2.0.25 (2005-08-08)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Artikelbezeichnung verschwindet nach Bieten.
+Fix: Zeitsync alle x Minuten läuft nicht ohne AutoAktualisieren.
+Fix: Absturz bei Rechtsklick/Kommentar eingeben auf neu eingefügten Artikel.
+Fix: Registerkarte wechselt bei SMTP-Test.
+Fix: Mailsteuerung über "Angebot an einen Freund senden".
+Fix: Währungsupdate ermittelt unsinnige Werte.
+Fix: HTML-Zeitsync liefert falsche Werte bei Zeitzonen mit halben Stunden.
+Fix: TrayIcon nach Explorerabsturz verschwunden.
+Fix: Passwörter mit mehr als 30 Zeichen funktionieren nicht.
+Fix: Zerstörte Artikel.csv durch Absturz.
+
+Feature: Spanische und ungarische Sprachunterstützung hinzugefügt.
+
+
+==============================================================================
+
+
+Änderungen von 2.0.23 -> 2.0.24 (2005-08-04)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Artikel hinzufügen per Drag & Drop (jetzt aber wirklich)
+
+
+==============================================================================
+
+
+Änderungen von 2.0.22 -> 2.0.23 (2005-08-04)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Artikel hinzufügen per Drag & Drop
+
+
+==============================================================================
+
+
+Änderungen von 2.0.21 -> 2.0.22 (2005-07-19)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Währungspatch eingepflegt (untested) 
+Fix: Auslesen der INIs jetzt mit 255 Zeichen pro Schlüssel, statt mit 
+     bislang 128 Zeichen (multiaccounttauglich) 
+
+Feature: italienische und französische Sprachunterstützung hinzugefügt. 
+Feature: Erweitertes Logging für die ODBC Anbindung 
+Feature: ReLogin x Minuten vor nächster Auktion 
+
+
+==============================================================================
+
+
+Änderungen von 2.0.20 -> 2.0.21 (2004-10-30)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Bieten
+
+
+==============================================================================
+
+
+Änderungen von 2.0.19 -> 2.0.20 (2004-10-30)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: SSL-Login
+Fix: SSL-Bieten
+
+
+==============================================================================
+
+
+Änderungen von 2.0.18 -> 2.0.19 (2004-09-15)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Bietvorgang
+
+
+==============================================================================
+
+
+Änderungen von 2.0.17 -> 2.0.18 (2004-09-07)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Login mehrfache Versuche
+Fix: Bietvorgang erweitert
+Fix: Script-Server & Commands upgedated
+
+
+==============================================================================
+
+
+Änderungen von 2.0.16 -> 2.0.17 (2004-08-14)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Gecancelte Artikel nicht mehr bebieten
+Fix: Änderung beim Bieten auf .com.
+
+Feature: Browsersprache in settings.ini einstellbar.
+
+
+==============================================================================
+
+
+Änderungen von 2.0.15 -> 2.0.16 (2004-08-08)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Artikel bei Nichtgefunden nochmals aktualisieren
+Fix: Inifiles relativ zum App-Path suchen
+Fix: Verbesserte Default-Browser-Erkennung
+Fix: Währungserkennung bei .com
+
+
+==============================================================================
+
+
+Änderungen von 2.0.14 -> 2.0.15 (2004-05-30)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Beim Einlesen der Watchlist auch Sofort-Kauf-Artikel einlesen.
+Fix: Update-Prüfung auch bei Autostart.
+
+Feature: Abgelaufene Artikel per Mailsteuerung löschen.
+
+
+==============================================================================
+
+
+Änderungen von 2.0.13 -> 2.0.14 (2004-05-27) 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+Fix: Bieten mit leerem Account gefixt.
+Fix: Anzeige bei Artikelupdate gefixt.
+Fix: Laufzeitfehler beim Account anlegen gefixt.
+Fix: Buttonsperre bei Anmeldefehler gefixt.
+    
+Feature: Unterstützung für MyeBay 2.0
+
+
+==============================================================================
+
+
+Änderungen von 2.0.12 -> 2.0.13 (2004-04-25)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Datums-/Zeitberechnung für nicht deutsche Datumstrennzeichen gefixt.
+Fix: UseDirectConnect wurde nicht korrekt aus der ini gelesen.
+
+Feature: BOMUpdater integriert.
+
+
+==============================================================================
+
+
+Änderungen von 2.0.11 -> 2.0.12 (2004-04-13)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Laufzeitfehler 5 beim Beenden behoben.
+Fix: Behandlung von Bietgruppen ohne Zahl gefixt.
+Fix: Löschen von abgelaufenen Auktionen gefixt.
+Fix: Während des Artikelupdates auch das Contextmenü sperren.
+Fix: Artikelfenster vor Bieten nicht mehr schließen.
+Fix: Während des Automatimodus nicht mehr alle Funktionen sperren.
+Fix: Fehlermeldung auch wenn keine Rechte um die Zeit zu setzen.
+Fix: Herunterfahren mit wiederholtem Countdown.
+Fix: Login/Logout auf eigenen Server umgestellt (signin).
+Fix: Login vs. LocalPass.
+Fix: Zeitumstellung Sommerzeit/Winterzeit wird jetzt berücksichtigt.
+Fix: Downloaddialog beim Versionsupdate im internen Browser wird angezeigt.
+Fix: Prüfung auf vollständige HTML-Seite.
+Fix: Eintrag 'Artikel beendet' im Testfile jetzt für den richtigen Artikel.
+
+Feature: Währungskurse jetzt in der settings.ini und online aktualisierbar.
+Feature: Sounds nach dem Bieten je nach Status.
+Feature: Ports für POP und SMTP jetzt einstellbar.
+Feature: Prüfung des IE-Offline-Status.
+Feature: Direkte Verbindung ohne Proxy jetzt unabhängig vom IE möglich.
+Feature: Verwaltung von mehreren Useraccounts und festlegen des Bietaccounts 
+	 für jeden Artikel, Anzeige des Accounts in der Statuszeile.
+Feature: AktualisierungsOptionen:
+	 Artikelauswahl die Aktualisiert werden
+	 Aktualisierung > x-min: Bis x-min vor Auktionsende alle X-min
+	 Aktualisierung < x-min: zyklisch oder nur nächster anstehender
+	 Aktualisierung beim start: Alle oder nur nächster anstehender
+Feature: Warnen im Automodus wenn kein Gebot
+Feature: Aktualisierungs-Countdown in der Statuszeile-2
+
+
+==============================================================================
+
+
+Änderungen von 2.0.10 -> 2.0.11 (2003-12-13)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: HTML-Zeitsync gefixt.
+
+
+==============================================================================
+
+
+Änderungen von 2.0.9 -> 2.0.10 (2003-12-09)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Hintergrund des Preisfeldes zurücksetzen.
+Fix: FontBold bei Zeilen-Restore gefixt.
+Fix: Login-Fehler-Behandlung bei Startup gefixt.
+Fix: EndeZeit ist jetzt Zeitzonen-unabhängig-korrekt.
+Fix: Splash und Countdown kollidieren, Rechner fährt ohne Countdown runter, gefixt.
+Fix: Bietvorgang gefixt.
+Fix: Zeitzonen-Handling gefixt. OffsetLocal ist jetzt die Differenz Server<->UTC
+Fix: Settings sind jetzt auch im Automode zugänglich.
+
+Feature: Javascript wird beim Speichern der Statusseiten entfernt.
+
+
+==============================================================================
+
+
+Änderungen von 2.0.8 -> 2.0.9 (2003-10-16)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Währungsbug Pfund<>Dollar gefixt.
+Fix: Bug bei Beträgen größer 1000 gefixt.
+Fix: Bug bei externem Browser und neuem Fenster gefixt.
+Fix: Bug bei Auktionsendemail gefixt.
+Fix: Bug in Usernamen-Vergleich gefixt.
+Fix: Bug in Timer-Automatikmodus gefixt (Restzeit friert ein).
+Fix: Leerartikel bei leerem MyEbay gefixt.
+Fix: Gebot und Bieter bei Sofortkauf gefixt.
+Fix: Bug bei Reduzierung der Anzahl Zeilen gefixt.
+Fix: Zeitangabe bei Mailversand gefixt.
+Fix: Betrag wird mit "0,00 ??" erkannt, gefixt.
+Fix: Betrag wird mit "?,?? ??" erkannt, gefixt.
+Fix: Fehlermeldungen im internen Browser abgeschaltet.
+
+
+==============================================================================
+
+
+Änderungen von 2.0.7 -> 2.0.8 (2003-09-21)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Bei Modembenutzung werden jetzt vor dem Auflegen die Mails verschickt.
+Fix: Bei Modembenutzung kann auf dem Reiter "Mail" jetzt wieder SMTP eingestellt werden.
+Fix: Das zyklische Artikelupdate und die POP-Abfrage kann nicht mehr beim Bieten anspringen.
+Fix: Cancel wird nur noch bei Gruppen-Änderung zurückgesetzt, nicht mehr pauschal bei Verlassen des Feldes.
+Fix: Problem mit Mindest-Gebot-Erkennung bei £ behoben.
+Fix: Restzeitanzeige in US-Format gefixt. (12AM-Problem)
+Fix: Erkennung von Privatauktionen und die abgelaufen-Erkennung gefixt.
+Fix: Zwangs-Minimieren bei Autostart entfernt, jetzt über Anzeige: Start minimiert möglich.
+Fix: Fensterposition speichern wenn Vollbild gefixt.
+Fix: Abstand der Toolbar gefixt.
+Fix: Minimiert Starten popt jetzt nicht mehr kurz auf.
+Fix: Alle HTML-Sonderzeichen im Auktions-Titel richtig umwandeln.
+Fix: Label und Checkbox im Artikelfenster Drag&Drop-fähig gemacht.
+Fix: Bei POP-Steuerung den Parameter Gruppe in Groß-/Kleinschreibung belassen.
+Fix: Bei POP-Steuerung in der Quittungsmail den Absender und Realname aus den Settings benutzen.
+Fix: Behandlung unbekannter Währungen gefixt.
+Fix: Einfrieren bei gleichzeizigem http-Zugriff gefixt.
+
+Feature: Verbesserte Fehlerbehandlung beim Lesen der Artikel.csv
+Feature: Liste kann jetzt nach Endezeit auf- und absteigend sortiert werden.
+Feature: Restzeit zählt nun auch bei abgeschalteter Automatik rückwärts.
+Feature: BOM beherrscht jetzt auch Proxy-Authentifizierung.
+Feature: Die Mails werden Quoted-Printable(ISO) codiert.
+Feature: BOM-Trayicons überarbeitet.
+Feature: Ressourcenverbrauch optimiert.
+Feature: Restzeit wird jetzt auch in Tagen angezeigt.
+Feature: Bei der Auktionsende-Mail kann jetzt auch ein Realname angegeben werden.
+Feature: Erweiterung der Angaben in der Status-Mail (POP-Steuerung).
+Feature: Status-Labels in StatusBar überführt.
+Feature: Beim automatischen Bieten kann ein Sound abgespielt werden.
+Feature: Verbesserte Gewonnen-Erkennung bei eBay-Bug (nicht pers. Artikelseite).
+Feature: Restzeit- / Datum,Uhrzeitanzeige in den Titelleiste abschaltbar.
+Feature: Update-Meldung verschwindet wieder nach 30 sec.
+Feature: Automatik im Tray umschaltbar.
+Feature: NeuerArtikel-Fenster über Tray aufrufbar.
+Feature: Zeitsync jetzt auch periodisch möglich.
+Feature: Alle abgelaufenen Artikel auf einmal entfernen (Menüpunkt).
+Feature: Auktionsende-Mail enthält Link zu Artikel.
+Feature: Versandkosten im Tooltip zu Akt. Preis.
+Feature: Akt. Preis grün, wenn BOM-User Höchstbieter.
+Feature: Bei Drag und Drop auf vorhandenen Artikel werden Gebot und Gruppe übernommen.
+Feature: Bei externem Browser HTML und HTTP optional in neuem Fenster öffnen.
+
+
+==============================================================================
+
+
+Änderungen von 2.0.6 -> 2.0.7 (2003-07-03)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Stealthmode, jetzt immer Stealth!
+Fix: Beenden nach letzter Auktion jetzt mit 10 Sekunden Warnung.
+Fix: Trayicon-Verhalten geändert.
+Fix: Eigenes Gebot gegen von eBay akzeptiertes Gebot prüfen.
+Fix: NeuerArtikelFenster nicht mehr auf Position 0, 0 setzen.
+Fix: Den Formular-Reset-Timer in NeuerArtikelFenster bei Alt-Tab nicht deaktivieren.
+Fix: ServerString überarbeitet.
+Fix: Auktionsendemail überarbeitet.
+
+Feature: Mehrfache Auswahl bei Zeitabgleich möglich.
+Feature: Aufteilung der Auktions-Ende-Mail in erfolgreich / nicht erfolgreich.
+Feature: NeuerArtikelFenster optional mit 'im Vordergrund' öffnen.
+Feature: Statuszeile im Browser.
+
+
+==============================================================================
+
+
+Änderungen von 2.0.5 -> 2.0.6 (2003-06-24)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix: Die Artikelbeschreibung zeit das &-Zeichen jetzt korrekt an.
+Fix: Das Format der Datei Artikel.csv wurde überarbeitet. Es können jetzt alle Sonderzeichen in der Beschreibung korrekt gespeichert werden. Ausserdem kann die Datei direkt mit OfficeXP geöffnet werden.
+Fix: Bei Eingabe eines Kommentars wird das ChangeFlag gesetzt (Beim Beenden Aufforderung zum Speichern).
+Fix: Bei Eingabe eines Kommentars werden die Zeilenumbrüche herausgefiltert.
+Fix: Beim Bieten wird das ChangeFlag gesetzt (Beim Beenden Aufforderung zum Speichern).
+Fix: Verbesserte Sprachumschaltung.
+Fix: Die aktive Sprache wird direkt beim Start angehakt.
+Fix: Es können jetzt wieder Auktions-Ende-Mails verschickt werden.
+Fix: Restzeit zählt auch nach dem Bieten bis auf 0 zuende herunter.
+Fix: Timer für Restzeit ist jetzt laufruhiger.
+Fix: Gewinnererkennung bei Artikelupdate nach Auktionsende vergleicht jetzt den Namen richtig.
+Fix: Popup-Menü im Tray verbessert.
+Fix: Beim Artikelupdate werden noch ein paar zusätzliche Menüs gesperrt.
+Fix: Beim Artikelupdate wird die Anzeige direkt aktualisiert.
+Fix: Dezimaltrennzeichen bei Gebotseingabe jetzt je nach Ländereinstellung (Fehler mit Betrag x100).
+Fix: Endlosschleife bei ungültigen Sonderzeichen in Auktionstitel beseitigt.
+Fix: Vor dem Bieten alte Savefiles löschen.
+Fix: Beim Zeitabgleich-Test in den Settings die Berechnung der Abweichung überarbeitet.
+Fix: Pop- und Smtp-Test in den Einstellungen überarbeitet und entkoppelt.
+Fix: Artikeldatei hat jetzt unbegrenzte Länge.
+
+Feature: Artikelupdate nach Auktionsende möglich auch wenn bereits überboten.
+Feature: Der Hinweis nach Zeitabgleich ist jetzt abstellbar.
+Feature: Artikelupdate beim Programmstart möglich.
+Feature: Beim Artikelupdate werden nur zukünftige Auktionen berücksichtigt. Abgelaufene Auktionen werden einmalig aktualisiert.
+Feature: Minimieren ins Tray ist jetzt optional.
+Feature: Die Updateprüfung für die Bom.exe und die Serverstrings.ini wurde wieder eingebaut.
+Feature: Im Fenster NeuerArtikel kann man jetzt auch Links mit Schrott hinter der Artikelnummer drag&droppen.
+Feature: Im Fenster NeuerArtikel wird bei Drag&Drop erstmal in einen Puffer geschrieben, das Update in BOM erfolgt im Hintergrund, das Fenster selbst ist sofort wieder aufnahmebereit.
+Feature: Das Fenster NeuerArtikel minimiert sich bei "immer im Vordergrund" nur wenn in den Settings eingestellt. 
+Feature: Position des Fensters NeuerArtikel ist speicherbar.
+Feature: Die Farbe des Fensters NeuerArtikel wird nach kurzer Zeit wieder auf "neutrales Grau" zurückgesetzt.
+Feature: Stop und Refresh im Browserfenster.
+Feature: Größe und Position des Browserfensters speicherbar.
+Feature: Titel des Browserfensters zeigt jetzt den Dokumenten-Titel an.
+Feature: ODBC jetzt generell aktiviert.
+Feature: Alle Einstellungs-Karteikarten sind direkt sichtbar.
+Feature: Änderungen verwerfen in den Einstellungen möglich.
+Feature: Einstellungsdialog komplett überarbeitet.
+Feature: Infofenster zeigt jetzt die Versionsnummern.
+Feature: Versionsprüfung für Sprach- und Serverdatei eingebaut.
+Feature: Artikelliste wird beim Beenden ohne Nachfrage gespeichert falls aktiviert.
+Feature: Warnung mit Hinweis auf nächste Auktion beim Beenden möglich.
+Feature: Beenden nach letzter Auktion möglich.
+Feature: Nach dem Bieten wird der Artikel direkt upgedated.
+Feature: Unterstützung des neuen Artikelseitenformats von eBay.
