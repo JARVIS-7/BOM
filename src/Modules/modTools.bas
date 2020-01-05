@@ -267,6 +267,14 @@ End Type
 
 
 'Windows API function declarations
+
+'Private Declare Function GetStdHandle Lib "kernel32" (ByVal nStdHandle As Long) As Long
+Private Declare Function ReadFile Lib "kernel32" (ByVal hFile As Long, _
+    lpBuffer As Any, ByVal nNumberOfBytesToRead As Long, _
+    lpNumberOfBytesRead As Long, lpOverlapped As Any) As Long
+Private Const STD_INPUT_HANDLE = -10&
+
+
 Public Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, Source As Any, ByVal Length As Long)
 
 Public Declare Function GetFileVersionInfo Lib "Version.dll" Alias "GetFileVersionInfoA" (ByVal lptstrFilename As String, ByVal dwhandle As Long, ByVal dwlen As Long, lpData As Any) As Long
@@ -798,9 +806,7 @@ Public Function ReadSetting(sSection As String, sName As String, Optional ByVal 
     Dim oIni As clsIni
     
     sFile = gsAppDataPath & "\Settings.ini"
-    
-    
-    
+      
     Set oIni = New clsIni
     
     Call oIni.ReadIni(sFile)
@@ -1048,7 +1054,6 @@ Public Sub SaveAllSettings()
     Call CINISetValue(oIni, "Diverses", "ServerStringsFile", gsServerStringsFile)
     
     With oIni
-        Call .SetValue("Diverses", "ToolTipSeparator", gsToolTipSeparator)
         Call .SetValue("Diverses", "ReservedPriceMarker", gsReservedPriceMarker)
         Call .SetValue("Diverses", "SendItemTo", gsSendItemTo)
         Call .SetValue("Diverses", "SendItemEncrypted", gbSendItemEncrypted)
@@ -2012,9 +2017,10 @@ Public Sub ReadAllSettings()
         'new auf normale umschalten
         If LCase(gsServerStringsFile) Like "*.new.*" Then gsServerStringsFile = Replace(gsServerStringsFile, ".new", "")
     End If
+        
+    gsToolTipSeparator = " " & Chr(149) & " "
     
     With oIni
-        gsToolTipSeparator = .GetValue("Diverses", "ToolTipSeparator", " " & Chr(127) & " ")
         gsReservedPriceMarker = .GetValue("Diverses", "ReservedPriceMarker", "%PRICE%*")
         gsSendItemTo = .GetValue("Diverses", "SendItemTo")
         gbSendItemEncrypted = .GetValue("Diverses", "SendItemEncrypted", "1")
@@ -4196,4 +4202,21 @@ Public Function maskString(stringToMask) As String
     ' " durch ÐÐÐ ersetzen
     maskString = Replace(maskString, """", Chr(208) & Chr(208) & Chr(208))
     
+End Function
+
+
+Public Function ReadStdIn(Optional ByVal NumBytes As Long = -1) As String
+    Dim StdIn As Long
+    Dim Result As Long
+    Dim Buffer As String
+    Dim BytesRead As Long
+    StdIn = GetStdHandle(STD_INPUT_HANDLE)
+    Buffer = Space$(1024)
+    Do
+        Result = ReadFile(StdIn, ByVal Buffer, Len(Buffer), BytesRead, ByVal 0&)
+        If Result = 0 Then
+            Err.Raise 1001, , "Unable to read from standard input"
+        End If
+        ReadStdIn = ReadStdIn & Left$(Buffer, BytesRead)
+    Loop Until BytesRead < Len(Buffer)
 End Function

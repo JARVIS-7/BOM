@@ -46,7 +46,6 @@ Public Function Curl(sUrl As String, sPostData As String, sReferer As String, sE
 120       myTime = GetTickCount
           
 130       lProcessID = ShellStart("""" & App.Path & "\JARVIS-7.exe """ & myParams & """", vbHide)
-         'lProcessID = ShellStart("""" & App.Path & "\curl.exe"" --config """ & colCurlConfig("FILE_CONFIG") & """", vbHide)
           
 140       If lProcessID <= 0 Then DebugPrint "no curl process id, url = " & sUrl
           
@@ -57,7 +56,7 @@ Public Function Curl(sUrl As String, sPostData As String, sReferer As String, sE
 170       mcolParams.Add sOutFile, "c" & sKey
 180       mcolParams.Add sUrl, "u" & sKey
 190       mcolParams.Add sKey, "k" & sKey
-          
+
 200       If bWait Then
 210           Do
 220               Call Sleep(10)
