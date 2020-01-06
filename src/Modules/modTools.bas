@@ -4203,6 +4203,28 @@ Dim puLen     As Long
     End If
 End Function
 
+Public Function GetMainVersion(ByVal FileName As String) As String
+Dim nDummy As Long
+Dim sBuffer()         As Byte
+Dim nBufferLen        As Long
+Dim lplpBuffer       As Long
+Dim udtVerBuffer      As VS_FIXEDFILEINFO
+Dim puLen     As Long
+      
+   nBufferLen = GetFileVersionInfoSize(FileName, nDummy)
+   
+   If nBufferLen > 0 Then
+   
+        ReDim sBuffer(nBufferLen) As Byte
+        Call GetFileVersionInfo(FileName, 0&, nBufferLen, sBuffer(0))
+        Call VerQueryValue(sBuffer(0), "\", lplpBuffer, puLen)
+        Call CopyMemory(udtVerBuffer, ByVal lplpBuffer, Len(udtVerBuffer))
+        
+        GetMainVersion = udtVerBuffer.dwFileVersionMSh
+  
+    End If
+End Function
+
 Public Function maskString(stringToMask) As String
     
     maskString = stringToMask
