@@ -281,8 +281,20 @@ Public Declare Function GetFileVersionInfo Lib "Version.dll" Alias "GetFileVersi
 Public Declare Function GetFileVersionInfoSize Lib "Version.dll" Alias "GetFileVersionInfoSizeA" (ByVal lptstrFilename As String, lpdwHandle As Long) As Long
 Public Declare Function VerQueryValue Lib "Version.dll" Alias "VerQueryValueA" (pBlock As Any, ByVal lpSubBlock As String, lplpBuffer As Any, puLen As Long) As Long
 
-
-
+' Special Folders
+Public Declare Function SHGetSpecialFolderLocation Lib "shell32.dll" (ByVal hwndOwner As Long, ByVal nFolder As Long, pidl As ITEMIDLIST) As Long
+Public Declare Function SHGetPathFromIDList Lib "shell32.dll" Alias "SHGetPathFromIDListA" (ByVal pidl As Long, ByVal pszPath As String) As Long
+Public Type SHITEMID
+  cb As Long
+  abID As Byte
+End Type
+Public Type ITEMIDLIST
+  mkid As SHITEMID
+End Type
+Public Enum spfSpecialFolderConstants
+  spfAppdata = &H1A
+  spfLOCAL_APPDATA = &H1C
+End Enum
 
 Public Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Integer, ByVal lParam As Long) As Long
 Public Const WM_SETICON As Long = &H80
@@ -4205,18 +4217,18 @@ Public Function maskString(stringToMask) As String
 End Function
 
 
-Public Function ReadStdIn(Optional ByVal NumBytes As Long = -1) As String
-    Dim StdIn As Long
-    Dim Result As Long
-    Dim Buffer As String
-    Dim BytesRead As Long
-    StdIn = GetStdHandle(STD_INPUT_HANDLE)
-    Buffer = Space$(1024)
-    Do
-        Result = ReadFile(StdIn, ByVal Buffer, Len(Buffer), BytesRead, ByVal 0&)
-        If Result = 0 Then
-            Err.Raise 1001, , "Unable to read from standard input"
-        End If
-        ReadStdIn = ReadStdIn & Left$(Buffer, BytesRead)
-    Loop Until BytesRead < Len(Buffer)
+Public Function GetSpecialFolderPath(ByVal FolderID As spfSpecialFolderConstants) As String
+
+  Dim nItemList As ITEMIDLIST
+  Dim nPath As String
+  
+  Const NOERROR = 0
+  
+  If SHGetSpecialFolderLocation(0, FolderID, nItemList) = NOERROR Then
+    nPath = Space$(260)
+    If SHGetPathFromIDList(nItemList.mkid.cb, nPath) <> 0 Then
+      GetSpecialFolderPath = Left$(nPath, InStr(nPath, vbNullChar) - 1)
+    End If
+  End If
 End Function
+

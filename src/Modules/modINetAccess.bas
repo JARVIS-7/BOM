@@ -958,7 +958,7 @@ Public Function CheckInternetConnection() As Boolean
 Dim lpRasConn(255) As RASCONN
 Dim lpcConnections As Long
 Dim lpcb As Long
-Dim result As Long
+Dim Result As Long
 
 On Error GoTo errhdl
 
@@ -970,7 +970,7 @@ Else
     lpRasConn(0).dwSize = 412
     lpcb = 256 * lpRasConn(0).dwSize
 
-    result = RasEnumConnections(lpRasConn(0), lpcb, lpcConnections)
+    Result = RasEnumConnections(lpRasConn(0), lpcb, lpcConnections)
     
     If lpcConnections < 1 Then
         'es besteht keine DFÜ-Verbindung

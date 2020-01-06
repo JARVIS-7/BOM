@@ -188,6 +188,25 @@ End Sub
 
 Public Function TestForCurl() As Boolean
     
-    If Dir(App.Path & "\JARVIS-7.exe") > "" Then TestForCurl = True
+    
+    If Dir(GetSpecialFolderPath(&H25) & "\mshtml.dll", vbNormal) <> "mshtml.dll" Then
+        TestForCurl = False
+        DebugPrint "mshtml.dll not found -> JARVIS-7 disabled", 0
+        Exit Function
+    End If
+    
+    If GetFileVersion(GetSpecialFolderPath(&H25) & "\mshtml.dll") < 9 Then
+        TestForCurl = False
+        DebugPrint "mshtml.dll Version < 9 -> JARVIS-7 disabled", 0
+        Exit Function
+    End If
+    
+    If Dir(App.Path & "\JARVIS-7.exe") <> "JARVIS-7.exe" Then
+        TestForCurl = False
+        DebugPrint "JARVIS-7.exe not found -> JARVIS-7 disabled", 0
+        Exit Function
+    End If
+    
+    TestForCurl = True
     
 End Function
