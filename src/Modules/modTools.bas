@@ -3207,7 +3207,7 @@ Public Sub UpdateCurrencies()
     
     Call InitCurrencies
     
-    sUrl = "http://" & gsScript9 & gsScriptCommand9
+    sUrl = "https://" & gsScript9 & gsScriptCommand9
     sPostData = gsCmdUpdateCurrencies
     sReferer = gsCmdUpdateCurrReferer
     
