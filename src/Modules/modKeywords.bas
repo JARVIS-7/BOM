@@ -23,7 +23,7 @@ Attribute VB_Name = "modKeywords"
 '*******************************************************
 Option Explicit
 
-Private Const msREQUIREDKEYWORDSVERSION As String = "1.0.147"
+Private Const msREQUIREDKEYWORDSVERSION As String = "1.0.148"
 
 '
 ' Liste der Keywords und die entsprechenden Zugriffe

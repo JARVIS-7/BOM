@@ -1,5 +1,5 @@
 Attribute VB_Name = "modRegistry"
-Option Explicit
+'Option Explicit
 
 Public Const HKEY_CLASSES_ROOT As Long = &H80000000
 Public Const HKEY_CURRENT_USER As Long = &H80000001
@@ -23,7 +23,8 @@ Private Const KEY_READ As Long = KEY_QUERY_VALUE Or KEY_ENUMERATE_SUB_KEYS Or KE
 Private Const ERROR_SUCCESS As Long = 0&
 
 'Const REG_NONE = 0      ' No value type
-Private Const REG_SZ As Long = 1&       ' Unicode nul terminated string
+'Private Const REG_SZ As Long = 1&       ' Unicode nul terminated string
+Const REG_SZ = 1
 
 'Const REG_EXPAND_SZ = 2 ' Unicode nul terminated string (with environment variable references)
 'Const REG_BINARY = 3    ' Free form binary
@@ -37,15 +38,18 @@ Private Const REG_DWORD As Long = 4    ' 32-bit number
 'Private Const REG_OPTION_NON_VOLATILE As Long = &H0
 'Private Const REG_CREATED_NEW_KEY As Long = &H1
 
-Private Declare Function RegOpenKeyEx Lib "advapi32.dll" Alias "RegOpenKeyExA" (ByVal hKey As Long, ByVal lpSubKey As String, ByVal ulOptions As Long, ByVal samDesired As Long, phkResult As Long) As Long
-Private Declare Function RegCloseKey Lib "advapi32.dll" (ByVal hKey As Long) As Long
+Public Declare Function RegOpenKey Lib "advapi32.dll" Alias "RegOpenKeyA" (ByVal HKEY As Long, ByVal lpSubKey As String, phkResult As Long) As Long
+Private Declare Function RegOpenKeyEx Lib "advapi32.dll" Alias "RegOpenKeyExA" (ByVal HKEY As Long, ByVal lpSubKey As String, ByVal ulOptions As Long, ByVal samDesired As Long, phkResult As Long) As Long
+Private Declare Function RegCloseKey Lib "advapi32.dll" (ByVal HKEY As Long) As Long
+Public Declare Function RegCreateKey Lib "advapi32.dll" Alias "RegCreateKeyA" (ByVal HKEY As Long, ByVal lpSubKey As String, phkResult As Long) As Long
 'Private Declare Function RegCreateKeyEx Lib "advapi32.dll" Alias "RegCreateKeyExA" (ByVal hKey As Long, ByVal lpSubKey As String, ByVal Reserved As Long, ByVal lpClass As String, ByVal dwOptions As Long, ByVal samDesired As Long, ByVal lpSecurityAttributes As Any, phkResult As Long, lpdwDisposition As Long) As Long
 'Private Declare Function RegFlushKey Lib "advapi32.dll" (ByVal hKey As Long) As Long
 'Private Declare Function RegSetValueEx_String Lib "advapi32.dll" Alias "RegSetValueExA" (ByVal hKey As Long, ByVal lpValueName As String, ByVal Reserved As Long, ByVal dwType As Long, ByVal lpData As String, ByVal cbData As Long) As Long
+Public Declare Function RegSetValueEx Lib "advapi32.dll" Alias "RegSetValueExA" (ByVal HKEY As Long, ByVal lpValueName As String, ByVal Reserved As Long, ByVal dwType As Long, lpData As Any, ByVal cbData As Long) As Long
 'Private Declare Function RegSetValueEx_DWord Lib "advapi32.dll" Alias "RegSetValueExA" (ByVal hKey As Long, ByVal lpValueName As String, ByVal Reserved As Long, ByVal dwType As Long, lpData As Long, ByVal cbData As Long) As Long
-'Private Declare Function RegDeleteKey Lib "advapi32.dll" Alias "RegDeleteKeyA" (ByVal hKey As Long, ByVal lpSubKey As String) As Long
-'Private Declare Function RegDeleteValue Lib "advapi32.dll" Alias "RegDeleteValueA" (ByVal hKey As Long, ByVal lpValueName As String) As Long
-Private Declare Function RegQueryValueEx Lib "advapi32.dll" Alias "RegQueryValueExA" (ByVal hKey As Long, ByVal lpValueName As String, ByVal lpReserved As Long, lpType As Long, lpData As Any, lpcbData As Any) As Long
+Private Declare Function RegDeleteKey Lib "advapi32.dll" Alias "RegDeleteKeyA" (ByVal HKEY As Long, ByVal lpSubKey As String) As Long
+Public Declare Function RegDeleteValue Lib "advapi32.dll" Alias "RegDeleteValueA" (ByVal HKEY As Long, ByVal lpValueName As String) As Long
+Private Declare Function RegQueryValueEx Lib "advapi32.dll" Alias "RegQueryValueExA" (ByVal HKEY As Long, ByVal lpValueName As String, ByVal lpReserved As Long, lpType As Long, lpData As Any, lpcbData As Any) As Long
 
 
 ' Prüft auf das Vorhandensein eines Schlüssels.
@@ -149,20 +153,15 @@ Private Function DeleteKey(lRoot&, sKey$) As Boolean
     'DeleteKey = (lResult = ERROR_SUCCESS)
 End Function
 
-Private Function DeleteValue(lRoot&, sKey$, sField$) As Boolean
+Public Sub DeleteValue(ByVal HKEY As Long, ByVal strPath As String, ByVal strValue As String)
+   Dim hCurKey As Long
+   Dim lRegResult As Long
+   
+   lRegResult = RegOpenKey(HKEY, strPath, hCurKey)
+   lRegResult = RegDeleteValue(hCurKey, strValue)
+   lRegResult = RegCloseKey(hCurKey)
+End Sub
 
-    'MD-Marker , Function wird nicht aufgerufen
-    'Dim lResult&, keyhandle&
-    
-    'lResult = RegOpenKeyEx(Root, Key, 0, KEY_ALL_ACCESS, keyhandle)
-    'If lResult <> ERROR_SUCCESS Then
-    '    DeleteValue = False
-    '    Exit Function
-    'End If
-    'lResult = RegDeleteValue(keyhandle, Field)
-    'DeleteValue = (lResult = ERROR_SUCCESS)
-    'RegCloseKey keyhandle
-End Function
 Private Function ZTrim(vZString As Variant) As Variant
   Dim nullpos&
   ZTrim = ""
@@ -175,4 +174,49 @@ Private Function ZTrim(vZString As Variant) As Variant
   If nullpos = 1 Then Exit Function
   ZTrim = Trim$(Left$(vZString, nullpos - 1))
 End Function
+
+Public Function GetSettingString(HKEY As Long, strPath As String, strValue As String, Optional Default As String) As String
+   Dim hCurKey As Long
+   Dim lValueType As Long
+   Dim strBuffer As String
+   Dim lDataBufferSize As Long
+   Dim intZeroPos As Integer
+   Dim lRegResult As Long
+   
+   If Not IsEmpty(Default) Then
+     GetSettingString = Default
+   Else
+     GetSettingString = ""
+   End If
+   lRegResult = RegOpenKey(HKEY, strPath, hCurKey)
+   lRegResult = RegQueryValueEx(hCurKey, strValue, 0&, lValueType, ByVal 0&, lDataBufferSize)
+   If lRegResult = ERROR_SUCCESS Then
+      If lValueType = REG_SZ Or lTypeValue = REG_EXPAND_SZ Then
+         strBuffer = String(lDataBufferSize, " ")
+         lRegResult = RegQueryValueEx(hCurKey, strValue, 0&, 0&, ByVal strBuffer, lDataBufferSize)
+         intZeroPos = InStr(strBuffer, Chr$(0))
+         If intZeroPos > 0 Then
+            GetSettingString = Left$(strBuffer, intZeroPos - 1)
+         Else
+            GetSettingString = strBuffer
+         End If
+      End If
+   Else
+      'Irgendetwas ist schiefgegangen
+   End If
+   lRegResult = RegCloseKey(hCurKey)
+End Function
+
+
+Public Sub SaveSettingString(HKEY As Long, strPath As String, strValue As String, strData As String)
+   Dim hCurKey As Long
+   Dim lRegResult As Long
+   
+   lRegResult = RegCreateKey(HKEY, strPath, hCurKey)
+   lRegResult = RegSetValueEx(hCurKey, strValue, 0, REG_SZ, ByVal strData, Len(strData))
+   If lRegResult <> ERROR_SUCCESS Then
+      'Irgendetwas ist schiefgegangen
+   End If
+   lRegResult = RegCloseKey(hCurKey)
+End Sub
 

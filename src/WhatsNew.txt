@@ -1,3 +1,10 @@
+Änderungen von 2.14.16 -> 2.14.20 (2019-12-19)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+BOM wurde für die Verwendung von JARVIS-7 angepasst
+Die Sourcen sind jetzt auf https://github.com/JARVIS-7/BOM verfügbar
+Änderungen neuer Versionen werden bis auf weiteres dort protokolliert
+
 
 Änderungen von 2.14.15 -> 2.14.16 (2018-08-17)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

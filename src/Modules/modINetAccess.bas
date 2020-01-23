@@ -43,7 +43,10 @@ Private mlGlobHandle As Long
   Private Declare Function URLDownloadToFile Lib "urlmon.dll" Alias "URLDownloadToFileA" _
                   (ByVal pCaller As Long, ByVal szURL As String, ByVal szFileName As String, _
                   ByVal dwReserved As Long, ByVal lpfnCB As Long) As Long
-         
+                  
+  Private Declare Function DeleteUrlCacheEntry Lib "wininet" Alias "DeleteUrlCacheEntryA" _
+                    (ByVal lpszUrlName As String) As Long
+                  
 ' Für Modem- Betrieb
 
   Private Declare Function InternetDial Lib "wininet.dll" _
@@ -184,6 +187,7 @@ End If
 
 sUrlOrg = strUrl & IIf(sPostData <> "", "?" & sPostData, "")
 DebugPrint "HttpRequest: " & sUrlOrg, 3
+Debug.Print "HttpRequest: " & sUrlOrg
 strTimeStart = GetDateTimeString()
 
 Redirect:
@@ -1400,7 +1404,11 @@ End Sub
 
 Private Function DownloadFromWeb(ByVal strUrl As String, ByVal sSaveFilePathName As String) As Long
     On Error Resume Next
+    
+    DeleteUrlCacheEntry strUrl
+    
     DownloadFromWeb = URLDownloadToFile(0, strUrl, sSaveFilePathName, 0, 0)
+
 End Function
 
 Public Function GetUTCOffset() As Double

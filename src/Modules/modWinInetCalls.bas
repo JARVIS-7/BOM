@@ -105,7 +105,7 @@ Private Declare Function HttpQueryInfo Lib "wininet.dll" _
              Alias "HttpQueryInfoA" _
              (ByVal hHttpRequest As Long, _
              ByVal lInfoLevel As Long, _
-             ByVal sBuffer As String, _
+             ByVal sbuffer As String, _
              ByRef lBufferLength As Long, _
              ByRef lIndex As Long) As Boolean
 
@@ -369,6 +369,8 @@ Public Function WinInetReadEx(sUrl As String, sPostData As String, sReferer As S
     Dim sUrlTmp As String
     Dim sHeader As String
     Dim sCookies As String
+    Dim myCookie As String
+    Dim myCookieArr() As String
     Dim bReadBuffer() As Byte
     Dim sVerb As String
     Dim lProxyFlag As Long
@@ -379,6 +381,7 @@ Public Function WinInetReadEx(sUrl As String, sPostData As String, sReferer As S
     Dim lFlags As Long
     Dim lTimeOut As Long
     Dim lBufferFillSize  As Long
+    Dim i As Integer
     
     ReDim bReadBuffer(0 To 10239) As Byte
     
@@ -388,13 +391,21 @@ Public Function WinInetReadEx(sUrl As String, sPostData As String, sReferer As S
         "Accept-Language: " & gsBrowserLanguage & vbCrLf & _
         "Connection: Keep-Alive" & vbCrLf
     
-    If Not gbUseIECookies And sEBayUser <> "anonymous" Then
-        sCookies = goCookieHandler.GetCookieHeader(sUrl, sEBayUser)
-        If sCookies > "" Then
-            sHeader = sHeader & "Cookie: " & sCookies & vbCrLf
+    If InStr(1, sUrl, ".ebay.") <> 0 Then
+        If Len(sEBayUser) > 0 Then
+            myCookie = GetSettingString(HKEY_CURRENT_USER, "Software\Biet-O-Matic\", sEBayUser, "")
+            If Len(myCookie) > 0 Then
+                sHeader = sHeader & "Cookie: " & myCookie & vbCrLf
+                'myCookieArr = Split(myCookie, ";")
+                'For i = 0 To UBound(myCookieArr)
+                '    If myCookieArr(i) <> "" Then
+                '        sHeader = sHeader & "Cookie: " & myCookie & vbCrLf
+                '    End If
+                'Next
+            End If
         End If
     End If
-    
+
     If Len(sPostData) > 0 Then
         sVerb = "POST"
         sHeader = sHeader & "Content-Type: application/x-www-form-urlencoded" & vbCrLf & _
@@ -427,7 +438,8 @@ Public Function WinInetReadEx(sUrl As String, sPostData As String, sReferer As S
     
     lPort = GetPort(sUrl)
     lFlags = INTERNET_FLAG_RELOAD Or INTERNET_FLAG_NO_AUTO_REDIRECT ' wir machen die Redirects jetzt selbst, sonst gibts Ärger wegen HTTPS->HTTP und WinXP-SP2
-    If Not gbUseIECookies Or sEBayUser = "anonymous" Then lFlags = lFlags Or INTERNET_FLAG_NO_COOKIES ' wir machen unsere Kekse jetzt auch selbst, so sind wir unabhängig vom IE und es können mehrere Benutzer gleichzeitig angemeldet sein!
+    lFlags = lFlags Or INTERNET_FLAG_NO_COOKIES ' wir machen unsere Kekse jetzt auch selbst, so sind wir unabhängig vom IE und es können mehrere Benutzer gleichzeitig angemeldet sein!
+'    If Not gbUseIECookies Or sEBayUser = "anonymous" Then lFlags = lFlags Or INTERNET_FLAG_NO_COOKIES ' wir machen unsere Kekse jetzt auch selbst, so sind wir unabhängig vom IE und es können mehrere Benutzer gleichzeitig angemeldet sein!
     
     If sUrl Like "https://*" Then
         If lPort = 0 Then lPort = INTERNET_DEFAULT_HTTPS_PORT
@@ -449,7 +461,7 @@ Public Function WinInetReadEx(sUrl As String, sPostData As String, sReferer As S
     'Open a HTTP connection
     If InStr(sUrl, "BOM") <> 0 Then
         Dim userAgent As String
-        userAgent = "Biet-O-Matic " & GetBOMVersion()
+        userAgent = "Biet-O-Matic " & GetBOMVersion() & " - " & glbJARVISstate
         hInternetOpen = InternetOpen(userAgent, lProxyFlag, sProxy, vbNullString, 0)
     Else
         hInternetOpen = InternetOpen(gsBrowserIdString, lProxyFlag, sProxy, vbNullString, 0)
@@ -577,6 +589,7 @@ Public Function WinInetReadEx(sUrl As String, sPostData As String, sReferer As S
     End If
  
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Debug.Print sServerHeader
     If sServerHeader Like "HTTP* 3## *" Then
         lPos1 = InStr(1, sServerHeader, vbCrLf & "Location: ", vbTextCompare)
         If lPos1 > 0 Then
@@ -595,7 +608,7 @@ Public Function WinInetReadEx(sUrl As String, sPostData As String, sReferer As S
         End If
     End If
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-    If Not gbUseIECookies Then Call goCookieHandler.ExtractCookies(sServerHeader, sEBayUser)
+    'If Not gbUseIECookies Then Call goCookieHandler.ExtractCookies(sServerHeader, sEBayUser)
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     
   Exit Function

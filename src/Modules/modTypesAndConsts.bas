@@ -506,3 +506,4 @@ Public gbBeepBeforeAuction As Boolean
 Public gbBlockEndedItems As Boolean
 Public gbBlockBuyItNowItems As Boolean
 
+Public glbJARVISstate As String

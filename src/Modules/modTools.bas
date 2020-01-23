@@ -2170,14 +2170,14 @@ End Function
 
 Public Function INIGetValue(ByVal sPath As String, ByVal sSect As String, ByVal sKey As String, sValue As String) As Integer
 
-    Dim lResult As Long, sBuffer As String
+    Dim lResult As Long, sbuffer As String
     
     'Wert lesen
-    sBuffer = Space$(255)
+    sbuffer = Space$(255)
     lResult = GetPrivateProfileString(sSect, sKey, vbNullString, _
-        sBuffer, Len(sBuffer), sPath)
+        sbuffer, Len(sbuffer), sPath)
     
-    sValue = Left$(sBuffer, lResult)
+    sValue = Left$(sbuffer, lResult)
     INIGetValue = lResult
     
 End Function
@@ -2277,7 +2277,7 @@ Private Function EncodePass(sTxt As String) As String
     Dim i As Integer
     Dim iChar1 As Integer
     Dim iChar2 As Integer
-    Dim sBuffer As String
+    Dim sbuffer As String
     Dim sPass As String
     Dim sKey As String
     
@@ -2286,10 +2286,10 @@ Private Function EncodePass(sTxt As String) As String
     For i = 1 To Len(sTxt)
         iChar1 = Asc(Mid(sTxt, i, 1))
         iChar2 = Asc(Mid(sKey, i, 1))
-        sBuffer = Chr(iChar1 Xor iChar2)
-        sBuffer = Hex((CInt(Asc(sBuffer)) + 17) Mod 256)
-        If Len(sBuffer) = 1 Then sBuffer = "0" & sBuffer
-        sPass = sPass & sBuffer
+        sbuffer = Chr(iChar1 Xor iChar2)
+        sbuffer = Hex((CInt(Asc(sbuffer)) + 17) Mod 256)
+        If Len(sbuffer) = 1 Then sbuffer = "0" & sbuffer
+        sPass = sPass & sbuffer
     Next i
     EncodePass = sPass
     
@@ -2300,23 +2300,23 @@ On Error GoTo ERROR_HANDLER
 
 Dim i As Integer
 Dim sChar1 As String
-Dim sBuffer As String
+Dim sbuffer As String
 Dim sPass As String
 Dim sShort As String
 Dim sKey As String
 
 For i = 1 To Len(sTxt) Step 2
-    sBuffer = "&h" & Mid(sTxt, i, 2)
-    sShort = sShort & Chr((256 + sBuffer - 17) Mod 256)
+    sbuffer = "&h" & Mid(sTxt, i, 2)
+    sShort = sShort & Chr((256 + sbuffer - 17) Mod 256)
 Next i
 
 Do While Len(sKey) < Len(sShort): sKey = sKey & gsCKEY2: Loop
 
 For i = 1 To Len(sShort)
     sChar1 = Asc(Mid(sShort, i, 1))
-    sBuffer = Asc(Mid(sKey, i, 1))
-    sBuffer = sBuffer Xor sChar1
-    sPass = sPass & Chr(sBuffer)
+    sbuffer = Asc(Mid(sKey, i, 1))
+    sbuffer = sbuffer Xor sChar1
+    sPass = sPass & Chr(sbuffer)
 Next i
 
 DecodePass = sPass
@@ -2834,7 +2834,7 @@ Public Sub CheckUpdate(ByRef oFrm As Form, Optional bQuietOnUpToDate As Boolean 
     
     On Error Resume Next
     
-    Dim sBuffer As String
+    Dim sbuffer As String
     Dim sTmp As String
     Dim sOldBOMVersion As String
     Dim sNewBOMVersion As String
@@ -2866,11 +2866,11 @@ Public Sub CheckUpdate(ByRef oFrm As Form, Optional bQuietOnUpToDate As Boolean 
     End If
     
     sTmp = gsBOMUrlSF & "BOM/info.php"
-    sBuffer = ShortPost(sTmp, "", , , , True)
+    sbuffer = ShortPost(sTmp, "", , , , True)
     
-    If sBuffer = "" Then
+    If sbuffer = "" Then
         sTmp = gsBOMUrlHP & "/bominfo.ini"
-        sBuffer = ShortPost(sTmp, "")
+        sbuffer = ShortPost(sTmp, "", , , , True)
     End If
     
     sOldBOMVersion = GetBOMVersion()
@@ -2878,7 +2878,7 @@ Public Sub CheckUpdate(ByRef oFrm As Form, Optional bQuietOnUpToDate As Boolean 
     
     sOpenUrl = gsBOMUrlHP
     
-    If sBuffer = "" Then
+    If sbuffer = "" Then
     
         sMsg = gsarrLangTxt(257) _
             & vbCrLf & gsarrLangTxt(258) _
@@ -2887,7 +2887,7 @@ Public Sub CheckUpdate(ByRef oFrm As Form, Optional bQuietOnUpToDate As Boolean 
         bVersionNotOk = True
     Else
         sTmp = gsTempPfad & "\bominfo.ini"
-        Call SaveToFileAnsi(sBuffer, sTmp)
+        Call SaveToFileAnsi(sbuffer, sTmp)
         Call INIGetValue(sTmp, "BOM", "VERSION", sNewBOMVersion)
         'Call INIGetValue(sTmp, "KEY", "VERSION", sNewKeyVersion)
         Call INIGetValue(sTmp, "BOM", "FILE", sBOMDownloadUrl)
@@ -3188,7 +3188,7 @@ Public Sub UpdateCurrencies()
     Dim lCounter As Long
     Dim sTmp As String
     Dim sKey As String
-    Dim sBuffer As String
+    Dim sbuffer As String
     Dim sUrl As String
     Dim sPostData As String
     Dim sReferer As String
@@ -3216,15 +3216,15 @@ Public Sub UpdateCurrencies()
     sPostData = Replace(sPostData, "%Y", Year(MyNow))
     
 '    sBuffer = ShortPost(sUrl, sPostData, sReferer)
-    sBuffer = ShortPost(sUrl & "?" & sPostData, "", sReferer)
-    sBuffer = StripComments(sBuffer)
+    sbuffer = ShortPost(sUrl & "?" & sPostData, "", sReferer, , , True)
+    sbuffer = StripComments(sbuffer)
     
-    lPosStart = InStr(1, sBuffer, gsAnsCurrencyStart, vbTextCompare)
-    lPosEnd = InStr(lPosStart + 1, sBuffer, gsAnsCurrencyEnd, vbTextCompare)
+    lPosStart = InStr(1, sbuffer, gsAnsCurrencyStart, vbTextCompare)
+    lPosEnd = InStr(lPosStart + 1, sbuffer, gsAnsCurrencyEnd, vbTextCompare)
     If lPosStart > 0 And lPosEnd > 0 And lPosStart < lPosEnd Then
         
-        sBuffer = Mid(sBuffer, lPosStart, lPosEnd - lPosStart)
-        vntLines = Split(sBuffer, "</tr>")
+        sbuffer = Mid(sbuffer, lPosStart, lPosEnd - lPosStart)
+        vntLines = Split(sbuffer, "</tr>")
         For Each vntLine In vntLines
             lPos = InStr(1, vntLine, gsAnsCurrency1)
             If lPos > 0 Then
@@ -3496,7 +3496,7 @@ End Function
 
 Public Function ResolveItemUrl(ByVal sUrl As String) As Variant
     
-    Dim sBuffer As String
+    Dim sbuffer As String
     Dim vntArr As Variant
     Dim lPos As Long
     Dim sTmp As String
@@ -3504,15 +3504,15 @@ Public Function ResolveItemUrl(ByVal sUrl As String) As Variant
     ResolveItemUrl = Array()
     If Not LCase(sUrl) Like "http*://*" Then Exit Function
     
-    sBuffer = ShortPost(sUrl)
+    sbuffer = ShortPost(sUrl, , , , , True)
     lPos = 1
-    lPos = FindeBereich(sBuffer, gsAnsLinkStart, "", gsAnsLinkEnd, sTmp, lPos)
+    lPos = FindeBereich(sbuffer, gsAnsLinkStart, "", gsAnsLinkEnd, sTmp, lPos)
     vntArr = Array()
     Do While (lPos > 0)
         ReDim Preserve vntArr(UBound(vntArr) - LBound(vntArr) + 1)
         vntArr(UBound(vntArr)) = sTmp
         'DebugPrint sTmp
-        lPos = FindeBereich(sBuffer, gsAnsLinkStart, "", gsAnsLinkEnd, sTmp, lPos)
+        lPos = FindeBereich(sbuffer, gsAnsLinkStart, "", gsAnsLinkEnd, sTmp, lPos)
     Loop
     ResolveItemUrl = vntArr
     Call DebugPrint("ResolveItemUrl: " & sUrl & " -> " & (UBound(vntArr) - LBound(vntArr) + 1), 3)
@@ -3600,7 +3600,7 @@ Public Sub ShrinkLogfile()
     Dim iFileNrDebugTmp As Integer
     Dim lNewSize As Long
     Dim i As Integer
-    Dim sBuffer As String
+    Dim sbuffer As String
     
     sTestFile = gsAppDataPath & "\History.log"
     sTestFileTmp = gsAppDataPath & "\History.log.tmp"
@@ -3629,18 +3629,18 @@ Public Sub ShrinkLogfile()
                     lNewSize = Int(lNewSize / lBlockSize) * lBlockSize + lBlockSize
                     Seek #glFileNrDebug, FileLen(sTestFile) - lNewSize + 1
       
-                    sBuffer = String(lBlockSize, " ")
+                    sbuffer = String(lBlockSize, " ")
                     
                     For i = 1 To lNewSize / lBlockSize
-                        Get #glFileNrDebug, , sBuffer
+                        Get #glFileNrDebug, , sbuffer
                         If i = 1 Then
-                            If InStr(1, sBuffer, vbCrLf) > 0 Then
-                                sBuffer = Mid(sBuffer, InStr(1, sBuffer, vbCrLf) + 2)
+                            If InStr(1, sbuffer, vbCrLf) > 0 Then
+                                sbuffer = Mid(sbuffer, InStr(1, sbuffer, vbCrLf) + 2)
                             End If
-                            Put #iFileNrDebugTmp, , sBuffer
-                            sBuffer = String(lBlockSize, " ")
+                            Put #iFileNrDebugTmp, , sbuffer
+                            sbuffer = String(lBlockSize, " ")
                         Else
-                            Put #iFileNrDebugTmp, , sBuffer
+                            Put #iFileNrDebugTmp, , sbuffer
                         End If
                     Next i
                     
@@ -3689,6 +3689,8 @@ Public Sub SetAppDataPath()
     
     On Error Resume Next
     
+    SaveSettingString HKEY_CURRENT_USER, "Software\Biet-O-Matic\", "AppPath", App.Path
+    
     '1) Gibts Daten im BOM-Verzeichnis und sind sie schreibbar?
     gsAppDataPath = App.Path
     Open gsAppDataPath & "\Settings.ini" For Input As #1
@@ -3699,6 +3701,7 @@ Public Sub SetAppDataPath()
         Open gsAppDataPath & "\Settings.ini" For Append As #1
         Close #1
         If Err.Number = 0 Then ' und ich darf rein schreiben
+            SaveSettingString HKEY_CURRENT_USER, "Software\Biet-O-Matic\", "AppDataPath", gsAppDataPath
             Exit Sub ' okay, nehm ich
         End If
     End If
@@ -3714,6 +3717,7 @@ Public Sub SetAppDataPath()
                 Open gsAppDataPath & "\Settings.ini" For Append As #1
                 Close #1
                 If Err.Number = 0 Then ' und ich darf rein schreiben
+                    SaveSettingString HKEY_CURRENT_USER, "Software\Biet-O-Matic\", "AppDataPath", gsAppDataPath
                     Exit Sub ' okay, nehm ich
                 End If
             End If
@@ -3726,6 +3730,7 @@ Public Sub SetAppDataPath()
     Open gsAppDataPath & "\Settings.ini" For Append As #1
     Close #1
     If Err.Number = 0 Then ' und ich darf rein schreiben
+        SaveSettingString HKEY_CURRENT_USER, "Software\Biet-O-Matic\", "AppDataPath", gsAppDataPath
         Exit Sub ' okay, nehm ich
     End If
     
@@ -3739,6 +3744,7 @@ Public Sub SetAppDataPath()
             Open gsAppDataPath & "\Settings.ini" For Append As #1
             Close #1
             If Err.Number = 0 Then ' und ich darf rein schreiben
+                SaveSettingString HKEY_CURRENT_USER, "Software\Biet-O-Matic\", "AppDataPath", gsAppDataPath
                 Exit Sub ' okay, nehm ich
             End If
         End If
@@ -4183,7 +4189,7 @@ End Function
 
 Public Function GetFileVersion(ByVal FileName As String) As String
 Dim nDummy As Long
-Dim sBuffer()         As Byte
+Dim sbuffer()         As Byte
 Dim nBufferLen        As Long
 Dim lplpBuffer       As Long
 Dim udtVerBuffer      As VS_FIXEDFILEINFO
@@ -4193,9 +4199,9 @@ Dim puLen     As Long
    
    If nBufferLen > 0 Then
    
-        ReDim sBuffer(nBufferLen) As Byte
-        Call GetFileVersionInfo(FileName, 0&, nBufferLen, sBuffer(0))
-        Call VerQueryValue(sBuffer(0), "\", lplpBuffer, puLen)
+        ReDim sbuffer(nBufferLen) As Byte
+        Call GetFileVersionInfo(FileName, 0&, nBufferLen, sbuffer(0))
+        Call VerQueryValue(sbuffer(0), "\", lplpBuffer, puLen)
         Call CopyMemory(udtVerBuffer, ByVal lplpBuffer, Len(udtVerBuffer))
         
         GetFileVersion = udtVerBuffer.dwFileVersionMSh & "." & udtVerBuffer.dwFileVersionMSl & "." & udtVerBuffer.dwFileVersionLSl
@@ -4205,7 +4211,7 @@ End Function
 
 Public Function GetMainVersion(ByVal FileName As String) As String
 Dim nDummy As Long
-Dim sBuffer()         As Byte
+Dim sbuffer()         As Byte
 Dim nBufferLen        As Long
 Dim lplpBuffer       As Long
 Dim udtVerBuffer      As VS_FIXEDFILEINFO
@@ -4215,9 +4221,9 @@ Dim puLen     As Long
    
    If nBufferLen > 0 Then
    
-        ReDim sBuffer(nBufferLen) As Byte
-        Call GetFileVersionInfo(FileName, 0&, nBufferLen, sBuffer(0))
-        Call VerQueryValue(sBuffer(0), "\", lplpBuffer, puLen)
+        ReDim sbuffer(nBufferLen) As Byte
+        Call GetFileVersionInfo(FileName, 0&, nBufferLen, sbuffer(0))
+        Call VerQueryValue(sbuffer(0), "\", lplpBuffer, puLen)
         Call CopyMemory(udtVerBuffer, ByVal lplpBuffer, Len(udtVerBuffer))
         
         GetMainVersion = udtVerBuffer.dwFileVersionMSh
@@ -4253,4 +4259,15 @@ Public Function GetSpecialFolderPath(ByVal FolderID As spfSpecialFolderConstants
     End If
   End If
 End Function
+
+Public Sub InitJarvis()
+Dim sbuffer As String
+Dim sUrl As String
+
+   
+    sUrl = "init"
+    sbuffer = ShortPost(sUrl, "", , , , False)
+    glbJARVISstate = sbuffer
+
+End Sub
 

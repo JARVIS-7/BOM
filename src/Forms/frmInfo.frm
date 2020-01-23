@@ -40,7 +40,7 @@ Begin VB.Form frmInfo
       NoFolders       =   0   'False
       Transparent     =   0   'False
       ViewID          =   "{0057D0E0-3573-11CF-AE69-08002B2E1262}"
-      Location        =   "http:///"
+      Location        =   ""
    End
 End
 Attribute VB_Name = "frmInfo"
