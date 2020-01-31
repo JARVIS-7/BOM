@@ -161,6 +161,7 @@ Dim bOk As Boolean
 Dim iFileNo As Integer
 Dim sFollowToUrl As String
 Dim iRetries As Integer
+Dim iRedirects As Integer
 
 On Error Resume Next
 
@@ -190,6 +191,7 @@ DebugPrint "HttpRequest: " & sUrlOrg, 3
 Debug.Print "HttpRequest: " & sUrlOrg
 strTimeStart = GetDateTimeString()
 
+iRedirects = 0
 Redirect:
 
 strUrl = Trim(strUrl)
@@ -207,7 +209,10 @@ If ShortPost Like "Redirect:*" Then
   strUrl = Mid(ShortPost, 10)
   sPostData = ""
   DebugPrint "HttpRedirect: " & strUrl, 3
-  GoTo Redirect
+  If iRedirects <= 3 Then
+    iRedirects = iRedirects + 1
+    GoTo Redirect
+  End If
 End If
 
 strTimeEnd = GetDateTimeString()
@@ -244,10 +249,12 @@ If gbLogHtml Then
   CloseLogfile
 End If
 
-sFollowToUrl = GetMetaHttpEquivRefresh(ShortPost)
-If Len(sFollowToUrl) > 0 Then
-  ShortPost = ShortPost(sFollowToUrl, "", strUrl, sEBayUser)
-End If
+' 'Rekursiv geht meistens schief....
+'sFollowToUrl = GetMetaHttpEquivRefresh(ShortPost)
+'If Len(sFollowToUrl) > 0 Then
+'    DebugPrint "Redirect: " & sFollowToUrl
+'  ShortPost = ShortPost(sFollowToUrl, "", strUrl, sEBayUser)
+'End If
 
 End Function
 

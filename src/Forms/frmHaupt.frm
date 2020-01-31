@@ -3327,17 +3327,17 @@ mbIsLoggingIn = True
     
     'DebugPrint "Login mit gsUser: " & sLoginUser, "Pass: " & sLoginPass
     
-    If gbUseIECookies Then ' wenn wir die IE-Kekse nehmen, ist evtl. jemand anderes eingeloggt, also zunächst ein Logout
+    'If gbUseIECookies Then ' wenn wir die IE-Kekse nehmen, ist evtl. jemand anderes eingeloggt, also zunächst ein Logout
     
-        Call PanelText(StatusBar1, 2, "Logout")
+        'Call PanelText(StatusBar1, 2, "Logout")
         
-        sServer = "https://" & gsScript5 & gsScriptCommand5
+        'sServer = "https://" & gsScript5 & gsScriptCommand5
         
         'Logout
-        sKommando = gsCmdLogOff
-        sbuffer = ShortPost(sServer & sKommando, , , sLoginUser)
+        'sKommando = gsCmdLogOff
+        'sbuffer = ShortPost(sServer & sKommando, , , sLoginUser)
         
-    Else ' wir nehmen unsere eigenen Kekse, die werden pro User verwaltet, also ist niemand anderes eingeloggt, wir prüfen, ob wir schon eingeloggt sind
+    'Else ' wir nehmen unsere eigenen Kekse, die werden pro User verwaltet, also ist niemand anderes eingeloggt, wir prüfen, ob wir schon eingeloggt sind
         
         Call PanelText(StatusBar1, 2, "Check Login")
         
@@ -3347,7 +3347,7 @@ mbIsLoggingIn = True
         sKommando = gsCmdSummary
         sbuffer = ShortPost(sServer & sKommando, , , sLoginUser, , True)
               
-    End If
+    'End If
     
     tmpgsAnsSummary = Replace(gsAnsSummary, "[User]", sLoginUser)
     

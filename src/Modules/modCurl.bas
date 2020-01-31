@@ -195,7 +195,7 @@ Public Function TestForCurl() As Boolean
         Exit Function
     End If
     
-    If GetMainVersion(GetSpecialFolderPath(&H25) & "\mshtml.dll") < 9 Then
+    If GetMainVersion(GetSpecialFolderPath(&H25) & "\mshtml.dll") < 11 Then
         TestForCurl = False
         DebugPrint "mshtml.dll Version < 9 -> JARVIS-7 disabled", 0
         Exit Function
