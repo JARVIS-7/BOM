@@ -18,7 +18,7 @@ Eine bereits vorhandene Installation können Sie mit einem Updatepaket auf den a
 
 Das jeweils jüngste Updatepaket finden Sie hier: https://ssl.schnapper.de/BOM/DoUpdate.exe
 
-Fragen und Probleme können direkt im BOM-Forum geklärt werden: https://www.schnapper.de/board/viewforum.php?f=12 
+Eventuell auftretende Probleme können direkt im BOM-Forum geklärt werden: https://www.schnapper.de/board/viewforum.php?f=12, die wichtigsten Fragen sind hier im Wiki beantwortet: https://github.com/JARVIS-7/BOM/wiki 
 
 
 
