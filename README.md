@@ -18,7 +18,7 @@ Eine bereits vorhandene Installation können Sie mit einem Updatepaket auf den a
 
 Das jeweils jüngste Updatepaket finden Sie hier: https://ssl.schnapper.de/BOM/DoUpdate.exe
 
- 
+Fragen und Probleme können direkt im BOM-Forum geklärt werden: https://www.schnapper.de/board/viewforum.php?f=12 
 
 
 
