@@ -4,7 +4,7 @@ Bid-O-Matic
 
 Das ist ein Fork von Biet-O-Matic, ursprünglich von https://sourceforge.net/projects/bom/
 
-Die dort vorgehaltene Version ist (derzeit) nicht mehr funktionsfähig, weil der Anmeldevorgang bei eBay nicht erfolgreich durchgeführt werden kann.
+Die dort vorgehaltene Version ist nicht mehr funktionsfähig, weil der Anmeldevorgang bei eBay nicht erfolgreich durchgeführt werden kann.
 
 Diese Version lebt und funktioniert dank **JARVIS-7**.
 
@@ -14,11 +14,11 @@ Jarvis-7 ist nicht quelloffen und unterliegt einer proprietären Lizenz.
 
 Ein vollständiges Installationspaket finden Sie hier: https://ssl.schnapper.de/BOM/Biet-O-Matic_install.exe
 
-Eine bereits vorhandene Installation können Sie mit einem Updatepaket auf den aktuellen Stand bringen.
+Eine bereits vorhandene Installation können Sie mit einem Updatepaket auf den aktuellen Stand bringen.  
 
-Updatepakete finden Sie hier: https://github.com/JARVIS-7/BOM/releases
+Das jeweils jüngste Updatepaket finden Sie hier: https://ssl.schnapper.de/BOM/DoUpdate.exe
 
- 
+Eventuell auftretende Probleme können direkt im BOM-Forum geklärt werden: https://www.schnapper.de/board/viewforum.php?f=12, die wichtigsten Fragen sind hier im Wiki beantwortet: https://github.com/JARVIS-7/BOM/wiki 
 
 
 
