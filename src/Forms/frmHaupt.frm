@@ -1765,20 +1765,20 @@ End Sub
 
 Private Sub Mailbufftimer_Timer()
         
-    Dim sbuffer As String
+    Dim sBuffer As String
     Dim sSendTo As String
     
     If giSuspendState = 0 Then
         
-        If ReadMailBuff(sbuffer) Then
+        If ReadMailBuff(sBuffer) Then
             'Mail verschicken
-            If sbuffer Like "To: *" & vbCrLf & "*" Then
-                sSendTo = Mid(sbuffer, 5, InStr(1, sbuffer, vbCrLf) - 5)
-                sbuffer = Mid(sbuffer, InStr(1, sbuffer, vbCrLf) + 2)
+            If sBuffer Like "To: *" & vbCrLf & "*" Then
+                sSendTo = Mid(sBuffer, 5, InStr(1, sBuffer, vbCrLf) - 5)
+                sBuffer = Mid(sBuffer, InStr(1, sBuffer, vbCrLf) + 2)
             Else
                 sSendTo = gsSendEndTo
             End If
-            Call SendSMTP(gsSendEndFromRealname & "<" & gsSendEndFrom & ">", sSendTo, sbuffer)
+            Call SendSMTP(gsSendEndFromRealname & "<" & gsSendEndFrom & ">", sSendTo, sBuffer)
         End If
         MailBuffTimer.Enabled = CBool(MailBuffTimer.Tag)
         
@@ -3053,7 +3053,7 @@ Private Sub LoadMyEbay(Optional bDontAsk As Boolean = False)
 'MeinEbay laden
 Dim sServer As String
 Dim sKommando As String
-Dim sbuffer As String
+Dim sBuffer As String
 Dim lPos As Long
 Dim bTimerEnabled As Boolean
 Dim lRet As VbMsgBoxResult
@@ -3126,22 +3126,22 @@ sServer = "https://" & gsScript1 & gsScriptCommand1
 'Test
 'gsEbayLocalPass = URLEncode(gsEbayLocalPass)
 'gsUser = URLEncode(gsUser)
-sbuffer = ""
+sBuffer = ""
 
 sKommando = gsCmdWatchList
 sKommando = Replace(sKommando, "[User]", gsUser)
 sKommando = Replace(sKommando, "[lPass]", gsEbayLocalPass)
-sbuffer = ShortPost(sServer & sKommando, , , , , True)
+sBuffer = ShortPost(sServer & sKommando, , , , , True)
 
 Call PanelText(StatusBar1, 2, "")
-If Check_Wartung(sbuffer) Then GoTo errExit
+If Check_Wartung(sBuffer) Then GoTo errExit
 
-If InStr(1, sbuffer, gsAnsLoginOk, vbTextCompare) _
- + InStr(1, sbuffer, gsAnsLoginOk2, vbTextCompare) = 0 Then
+If InStr(1, sBuffer, gsAnsLoginOk, vbTextCompare) _
+ + InStr(1, sBuffer, gsAnsLoginOk2, vbTextCompare) = 0 Then
   gsEbayLocalPass = ""
   If Not bLoginTried Then
     Call LogIn
-    sbuffer = ShortPost(sServer & sKommando, , , , , True)
+    sBuffer = ShortPost(sServer & sKommando, , , , , True)
   End If
 End If
 
@@ -3156,11 +3156,11 @@ If gsCmdBidList > "" Then
   sKommando = gsCmdBidList
   sKommando = Replace(sKommando, "[User]", gsUser)
   sKommando = Replace(sKommando, "[lPass]", gsEbayLocalPass)
-  sbuffer = sbuffer & ShortPost(sServer & sKommando, , , , , True)
+  sBuffer = sBuffer & ShortPost(sServer & sKommando, , , , , True)
 End If
 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-If InStr(1, sbuffer, gsAnsWatchList) = 0 Then
+If InStr(1, sBuffer, gsAnsWatchList) = 0 Then
   gsWatchListType = IIf(gsWatchListType = "", "2", "")
   Call ReadAllKeywords
 End If
@@ -3168,7 +3168,7 @@ End If
 
 sReadItems = "|"
 
-If FindeBereich(sbuffer, gsAnsBidStart, "", gsAnsBidEnd, sTmp) Then
+If FindeBereich(sBuffer, gsAnsBidStart, "", gsAnsBidEnd, sTmp) Then
   lPos = 1
   lPos = FindeBereich(sTmp, gsAnsBidItemStart1, gsAnsBidItemPreEnd1, gsAnsBidItemEnd1, sArtikelTmp, lPos)
   Do While lPos
@@ -3185,7 +3185,7 @@ If FindeBereich(sbuffer, gsAnsBidStart, "", gsAnsBidEnd, sTmp) Then
   Loop
 End If
 
-If FindeBereich(sbuffer, gsAnsWatchStart, "", gsAnsWatchEnd, sTmp) Then
+If FindeBereich(sBuffer, gsAnsWatchStart, "", gsAnsWatchEnd, sTmp) Then
   lPos = 1
   lPos = FindeBereich(sTmp, gsAnsWatchItemStart1, gsAnsWatchItemPreEnd1, gsAnsWatchItemEnd1, sArtikelTmp, lPos)
   Do While lPos
@@ -3206,7 +3206,7 @@ End If
 
 
 lPos = 1
-lPos = FindeBereich(sbuffer, gsAnsNoteStart, "", gsAnsNoteEnd, sTmp, lPos)
+lPos = FindeBereich(sBuffer, gsAnsNoteStart, "", gsAnsNoteEnd, sTmp, lPos)
 Do While lPos
   If FindeBereich(sTmp, gsAnsNoteTextStart, "", gsAnsNoteTextEnd, sNotiz) Then
     If FindeBereich(sTmp, gsAnsNoteLineIDStart, "", gsAnsNoteLineIDEnd, sArtikelTmp) Then
@@ -3223,7 +3223,7 @@ Do While lPos
       Next
     End If
   End If
-  lPos = FindeBereich(sbuffer, gsAnsNoteStart, "", gsAnsNoteEnd, sTmp, lPos)
+  lPos = FindeBereich(sBuffer, gsAnsNoteStart, "", gsAnsNoteEnd, sTmp, lPos)
 Loop
 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -3281,7 +3281,7 @@ Public Sub LogIn(Optional ByVal sLoginUser As String, Optional ByVal sLoginPass 
 'User- PasswdCheck und Login
 Dim sServer As String
 Dim sKommando As String
-Dim sbuffer As String
+Dim sBuffer As String
 Dim sBuffer2 As String
 Dim lPos As Long
 Dim bTimerEnabled As Boolean
@@ -3345,13 +3345,13 @@ mbIsLoggingIn = True
         
         'wir testen mal den Login-Status
         sKommando = gsCmdSummary
-        sbuffer = ShortPost(sServer & sKommando, , , sLoginUser, , True)
+        sBuffer = ShortPost(sServer & sKommando, , , sLoginUser, , True)
               
     'End If
     
     tmpgsAnsSummary = Replace(gsAnsSummary, "[User]", sLoginUser)
     
-    lPos = InStr(1, sbuffer, tmpgsAnsSummary, vbTextCompare)
+    lPos = InStr(1, sBuffer, tmpgsAnsSummary, vbTextCompare)
     
     If lPos = 0 Then 'ausgelogt, jetzt einloggen
 
@@ -3362,11 +3362,11 @@ mbIsLoggingIn = True
         End If
 
         sServer = gsCmdLogIn2
-        sbuffer = ShortPost(sServer, , , sLoginUser, , False)
+        sBuffer = ShortPost(sServer, , , sLoginUser, , False)
 
     End If
     
-    lPos = InStr(1, sbuffer, tmpgsAnsSummary, vbTextCompare)
+    lPos = InStr(1, sBuffer, tmpgsAnsSummary, vbTextCompare)
 
 '            'jetzt eingeloggt?
 '            lPos = InStr(1, sBuffer, gsAnsLoginOk, vbTextCompare) _
@@ -3411,7 +3411,7 @@ mbIsLoggingIn = True
 '    End If
     
     If lPos = 0 Then
-        If Check_Wartung(sbuffer) Then GoTo errExit
+        If Check_Wartung(sBuffer) Then GoTo errExit
         
         'tja, war nix
         'Pass_Check.Caption = "Status: Fehler bei User/ Passwortprüfung, kein Login"
@@ -3422,7 +3422,7 @@ mbIsLoggingIn = True
         Toolbar1.Buttons(7).ToolTipText = gsarrLangTxt(70) & ": " & gsarrLangTxt(77)
         Call PanelText(StatusBar1, 2, gsarrLangTxt(70) & ": " & gsarrLangTxt(77), False, vbRed)
         
-        Call SaveToFile(sbuffer, msScratch)
+        Call SaveToFile(sBuffer, msScratch)
         On Error Resume Next
         'Unload frmBrowser
         gsGlobalUrl = msScratch
@@ -3859,7 +3859,7 @@ Private Function Bieten(ByVal sItem As String, _
 Dim sServer  As String
 Dim sKommando As String
 Dim sKommandoPublic As String
-Dim sbuffer As String
+Dim sBuffer As String
 Dim lPos As Long
 Dim sSaveFile As String
 Dim sMaxBid As String
@@ -3957,7 +3957,7 @@ End Select
 sMaxBid = URLEncode(sMaxGebot)
 
 'Kommando zerlegen
-sbuffer = ""
+sBuffer = ""
 If bIsBuyItNow Then
   sTmp = gsCmdBuyItNow
 Else
@@ -3967,7 +3967,7 @@ End If
 sTmp = Replace(sTmp, "[Item]", sItem)
 sTmp = Replace(sTmp, "[MaxBid]", sMaxBid)
 
-sKommando = sbuffer & sTmp
+sKommando = sBuffer & sTmp
 
 sServer = "https://" & gsScript4 & gsScriptCommand4
 sReferer = sServer & "ViewItem&item=" & sItem
@@ -3976,17 +3976,17 @@ sServer = "https://" & gsScript3 & gsScriptCommand3
 
 Call DebugPrint("Sende Anfrage zum Server: " & sServer & sKommando)
 
-sbuffer = ShortPost(sServer & sKommando, , sReferer, sEBayUser, , True)
+sBuffer = ShortPost(sServer & sKommando, , sReferer, sEBayUser, , True)
 
 'File für Errormeldungen wegretten
 lAufruf = lAufruf + 1
 sSaveFile = gsTempPfad & "\Art-" & sItem & "-1.html"
-Call SaveToFile(StripJavaScript(sbuffer), sSaveFile)
+Call SaveToFile(StripJavaScript(sBuffer), sSaveFile)
 sSaveFile = gsTempPfad & "\Art-" & sItem & "-" & CStr(lAufruf) & "-1.html"
-Call SaveToFile(StripJavaScript(sbuffer), sSaveFile)
+Call SaveToFile(StripJavaScript(sBuffer), sSaveFile)
 If (lDurchgang = 1) Then
   sSaveFile = gsTempPfad & "\Art-" & sItem & "-status.html"
-  Call SaveToFile(StripJavaScript(sbuffer), sSaveFile)
+  Call SaveToFile(StripJavaScript(sBuffer), sSaveFile)
 End If
 
 Set oHtmlForm = New clsHtmlForm
@@ -3996,12 +3996,12 @@ Do While lVersuch < mlMAXBIETVERSUCHE
   lVersuch = lVersuch + 1
   DoEvents
 
-  If InStr(1, sbuffer, gsAnsBidAccepted) + _
-     InStr(1, sbuffer, gsAnsBidAccepted2) + _
-     InStr(1, sbuffer, gsAnsBidAccepted3) + _
-     InStr(1, sbuffer, gsAnsBidAccepted4) > 0 Then  ' Wir haben das Gebot erfolgreich platziert
+  If InStr(1, sBuffer, gsAnsBidAccepted) + _
+     InStr(1, sBuffer, gsAnsBidAccepted2) + _
+     InStr(1, sBuffer, gsAnsBidAccepted3) + _
+     InStr(1, sBuffer, gsAnsBidAccepted4) > 0 Then  ' Wir haben das Gebot erfolgreich platziert
      
-    If FindeBereich(sbuffer, gsAnsTimeLeft, gsAnsTimeLeftStart, gsAnsTimeLeftEnd, sTmp) > 0 Then
+    If FindeBereich(sBuffer, gsAnsTimeLeft, gsAnsTimeLeftStart, gsAnsTimeLeftEnd, sTmp) > 0 Then
       sTmp = sTmp & gsAnsTimeLeftEnd
       FindeBereich sTmp, gsAnsTimeLeftStart, "", gsAnsTimeLeftEnd, sTmp
       sTmp = Replace(sTmp, vbCr, "")
@@ -4018,7 +4018,7 @@ Do While lVersuch < mlMAXBIETVERSUCHE
     Exit Function
   End If
 
-  If InStr(1, sbuffer, gsAnsBidOutBid) > 0 Then ' Wir wurden überboten
+  If InStr(1, sBuffer, gsAnsBidOutBid) > 0 Then ' Wir wurden überboten
     Call DebugPrint("Überboten")
     miErrStatus = [asUeberboten]
     Bieten = False
@@ -4026,7 +4026,7 @@ Do While lVersuch < mlMAXBIETVERSUCHE
     Exit Function
   End If
 
-  If InStr(1, sbuffer, gsAnsBidReserveNotMet) > 0 Then ' Mindestpreis nicht erreicht
+  If InStr(1, sBuffer, gsAnsBidReserveNotMet) > 0 Then ' Mindestpreis nicht erreicht
     Call DebugPrint("Mindestpreis nicht erreicht")
     miErrStatus = [asUeberboten]
     Bieten = False
@@ -4034,7 +4034,7 @@ Do While lVersuch < mlMAXBIETVERSUCHE
     Exit Function
   End If
 
-  If InStr(1, sbuffer, gsAnsBidErrMinBid) > 0 Then ' Unser Gebot ist zu niedrig
+  If InStr(1, sBuffer, gsAnsBidErrMinBid) > 0 Then ' Unser Gebot ist zu niedrig
     Call DebugPrint("Gebot zu niedrig")
     miErrStatus = [asUeberboten]
     Bieten = False
@@ -4042,7 +4042,7 @@ Do While lVersuch < mlMAXBIETVERSUCHE
     Exit Function
   End If
   
-  If InStr(1, sbuffer, gsAnsBidErrEnded) + InStr(1, sbuffer, gsAnsBidErrEnded2) > 0 Then ' Der Artikel ist abgelaufen
+  If InStr(1, sBuffer, gsAnsBidErrEnded) + InStr(1, sBuffer, gsAnsBidErrEnded2) > 0 Then ' Der Artikel ist abgelaufen
     Call DebugPrint("Artikel beendet")
     miErrStatus = [asErr]
     Bieten = False
@@ -4050,7 +4050,7 @@ Do While lVersuch < mlMAXBIETVERSUCHE
     Exit Function
   End If
 
-  If InStr(1, sbuffer, gsAnsBidErrNotAvail) > 0 Then  ' Der Artikel ist nicht mehr verfügbar
+  If InStr(1, sBuffer, gsAnsBidErrNotAvail) > 0 Then  ' Der Artikel ist nicht mehr verfügbar
     Call DebugPrint("Artikel nicht mehr verfügbar")
     miErrStatus = [asErr]
     Bieten = False
@@ -4058,7 +4058,7 @@ Do While lVersuch < mlMAXBIETVERSUCHE
     Exit Function
   End If
 
-  If InStr(1, sbuffer, gsAnsSignInError) > 0 Then ' User/Pass falsch
+  If InStr(1, sBuffer, gsAnsSignInError) > 0 Then ' User/Pass falsch
     Call DebugPrint("Anmeldung fehlerhaft")
     miErrStatus = [asErr]
     Bieten = False
@@ -4066,7 +4066,7 @@ Do While lVersuch < mlMAXBIETVERSUCHE
     Exit Function
   End If
 
-  If InStr(1, sbuffer, gsAnsBidErrGeneral) > 0 Then ' Sonstiger Fehler
+  If InStr(1, sBuffer, gsAnsBidErrGeneral) > 0 Then ' Sonstiger Fehler
     Call DebugPrint("Sonstiger Fehler")
     miErrStatus = [asErr]
     Bieten = False
@@ -4075,14 +4075,14 @@ Do While lVersuch < mlMAXBIETVERSUCHE
   End If
 
   oHtmlForm.Clear
-  oHtmlForm.ReadForm sbuffer, IIf(bIsBuyItNow, gsAnsBuyForm, gsAnsBidForm)       'das Html-Formular einlesen
-  If Not oHtmlForm.FormFound Then oHtmlForm.ReadForm sbuffer, gsAnsLoginFrm   'evtl. Login-Formular einlesen
-  If Not oHtmlForm.FormFound Then oHtmlForm.ReadForm sbuffer, IIf(bIsBuyItNow, gsAnsBuyForm2, gsAnsBidForm2)   'nächster Versuch (egun) / Belehrungsseite ('bay)
+  oHtmlForm.ReadForm sBuffer, IIf(bIsBuyItNow, gsAnsBuyForm, gsAnsBidForm)       'das Html-Formular einlesen
+  If Not oHtmlForm.FormFound Then oHtmlForm.ReadForm sBuffer, gsAnsLoginFrm   'evtl. Login-Formular einlesen
+  If Not oHtmlForm.FormFound Then oHtmlForm.ReadForm sBuffer, IIf(bIsBuyItNow, gsAnsBuyForm2, gsAnsBidForm2)   'nächster Versuch (egun) / Belehrungsseite ('bay)
   If Not oHtmlForm.FormFound Then
     'zuerst ein LogOff
     sServer = "https://" & gsScript5 & gsScriptCommand5
     sKommando = gsCmdLogOff
-    sbuffer = ShortPost(sServer & sKommando, , , sEBayUser, , True)
+    sBuffer = ShortPost(sServer & sKommando, , , sEBayUser, , True)
     Call DebugPrint("Neustart")
     GoTo NochmalVonVorne                 'hier geht was völlig schief, wir probieren es noch mal von vorne
   End If
@@ -4114,7 +4114,7 @@ Do While lVersuch < mlMAXBIETVERSUCHE
     Call DebugPrint("Achtung, falscher User(" & oHtmlForm.GetField(gsAnsUserField) & oHtmlForm.GetField(gsAnsUserField2) & oHtmlForm.GetField(gsAnsUserField3) & ") - Logout")
     
     'Probieren den "Nicht Ihr Mitgliedsname"-Link zu ermitteln
-    sServer = GetLinkNamedLike(sbuffer, gsAnsLinkChangeUser)
+    sServer = GetLinkNamedLike(sBuffer, gsAnsLinkChangeUser)
     If sServer <> "" Then
       If InStr(1, sServer, "?") > 0 Then
         sKommando = Mid(sServer, InStr(1, sServer, "?") + 1)
@@ -4161,7 +4161,7 @@ Do While lVersuch < mlMAXBIETVERSUCHE
   If oHtmlForm.GetField(gsAnsPassField) <> "" Then oHtmlForm.PutField gsAnsPassField, "xxx"
   sKommandoPublic = oHtmlForm.GetFields(gsSiteEncoding) 'und welche Daten?
   
-  If InStr(1, sbuffer, gsAnsBidConfirm) > 0 Then  ' Wir sollen bestätigen und der User stimmt, wir warten bis kurz vor Ende und schlagen dann zu
+  If InStr(1, sBuffer, gsAnsBidConfirm) > 0 Then  ' Wir sollen bestätigen und der User stimmt, wir warten bis kurz vor Ende und schlagen dann zu
     If Not bSofortBieten And gfVorlaufSnipe > 0 Then
       Call DebugPrint("Warten auf den Snipe")
       Do Until MyNow >= DateAdd("s", -Int(gfLzMittel + 0.5 + gfVorlaufSnipe), datEndeZeit)
@@ -4181,18 +4181,18 @@ Do While lVersuch < mlMAXBIETVERSUCHE
   End If
   
 PostIt:
-  Call DebugPrint("Sende Anfrage zum Server: " & sServer & "?" & sKommandoPublic)
+  Call DebugPrint("Sende Anfrage zum Server(PostIt): " & sServer & "?" & sKommandoPublic)
  
-  sbuffer = ShortPost(sServer, sKommando, sReferer, sEBayUser, , True)  'GET
+  sBuffer = ShortPost(sServer, sKommando, sReferer, sEBayUser, , True)  'GET
   
   lAufruf = lAufruf + 1
   sSaveFile = gsTempPfad & "\Art-" & sItem & "-2.html"
-  Call SaveToFile(StripJavaScript(sbuffer), sSaveFile)
+  Call SaveToFile(StripJavaScript(sBuffer), sSaveFile)
   sSaveFile = gsTempPfad & "\Art-" & sItem & "-" & CStr(lAufruf) & "-2-" & CStr(lVersuch) & ".html"
-  Call SaveToFile(sbuffer, sSaveFile)  ' ohne StripJavaScript, debuggt sich einfach besser!
+  Call SaveToFile(sBuffer, sSaveFile)  ' ohne StripJavaScript, debuggt sich einfach besser!
   If (lDurchgang = 1) Then
     sSaveFile = gsTempPfad & "\Art-" & sItem & "-status.html"
-    Call SaveToFile(StripJavaScript(sbuffer), sSaveFile)
+    Call SaveToFile(StripJavaScript(sBuffer), sSaveFile)
   End If
   
 Loop
@@ -4326,17 +4326,17 @@ End Sub
 Private Sub Do_OLEDragDrop(Index As Integer, Data As DataObject, Effect As Long, Button As Integer, Shift As Integer, X As Single, Y As Single)
   
   On Error Resume Next
-  Dim sbuffer As String
+  Dim sBuffer As String
   Dim i As Long
   
   For i = 1 To 255
     If Data.GetFormat(i) Then
-      sbuffer = Data.GetData(i)
-      If sbuffer > "" Then Exit For
+      sBuffer = Data.GetData(i)
+      If sBuffer > "" Then Exit For
     End If
   Next i
   
-  Call HandleDragDropData(Index, sbuffer, Effect, Button, Shift, X, Y)
+  Call HandleDragDropData(Index, sBuffer, Effect, Button, Shift, X, Y)
 
 End Sub
 
@@ -4494,6 +4494,13 @@ Private Sub Form_Unload(Cancel As Integer)
             
             If gbUsesModem Then Call ModemHangUp
             
+'            If Not IsNumeric(glbJARVISstate) Then
+'                Dim sBuffer As String
+'                Dim sUrl As String
+'                sUrl = "licence"
+'                sBuffer = ShortPost(sUrl, "", , , , False)
+'            End If
+            
             If mtTrayIcon.hWnd Then
                 Call Shell_NotifyIcon(NIM_DELETE, mtTrayIcon)
             End If
@@ -4580,26 +4587,26 @@ End Sub
 
 Private Sub StarteBrowser()
 On Error Resume Next
-Dim sTmp As String, sbuffer As String
+Dim sTmp As String, sBuffer As String
 Dim sKommando As String
 Dim lPos As Long
 
 If gsEbayLocalPass <> "" Then
-    sbuffer = ""
+    sBuffer = ""
 
     sTmp = gsCmdWatchList
     lPos = InStr(1, sTmp, "[User]")
     If lPos > 0 Then
-        sbuffer = Left$(sTmp, lPos - 1) & URLEncode(gsUser)
+        sBuffer = Left$(sTmp, lPos - 1) & URLEncode(gsUser)
         sTmp = Mid$(sTmp, lPos + 6)
     End If
     lPos = InStr(1, sTmp, "[lPass]")
     If lPos > 0 Then
-        sbuffer = sbuffer & Left$(sTmp, lPos - 1) & URLEncode(gsEbayLocalPass)
+        sBuffer = sBuffer & Left$(sTmp, lPos - 1) & URLEncode(gsEbayLocalPass)
         sTmp = Mid$(sTmp, lPos + 7)
     End If
 
-    sKommando = sbuffer & sTmp
+    sKommando = sBuffer & sTmp
 
     gsGlobalUrl = "https://" & gsScript1 & gsScriptCommand1 & sKommando
     '& "MyEbayItemsBiddingOn&userid=" & gsUser & "&pass=" & gsEbayLocalPass & "&first=N&sellerSort=3&bidderSort=3&watchSort=3&dayssince=2&p1=0&p2=0&p3=0&p4=0&p5=0"
@@ -4827,7 +4834,7 @@ Private Function BearbeiteMailAuftrag(col As Collection, ByRef sShutdownFlag As 
   On Error Resume Next
   
   'schlägt alle 60 sec zu
-  Dim sbuffer As String
+  Dim sBuffer As String
   Dim sBufferOrg As String
   Dim sKommando As String
   Dim sArtikel As String
@@ -4857,14 +4864,14 @@ Private Function BearbeiteMailAuftrag(col As Collection, ByRef sShutdownFlag As 
   bVorhanden = False
 
   While (col.Count > 0)
-      sbuffer = col.Item(1)(LBound(col.Item(1)) + 0)
+      sBuffer = col.Item(1)(LBound(col.Item(1)) + 0)
       sRecvReply = col.Item(1)(LBound(col.Item(1)) + 1)
       col.Remove (1)
       
       iMsgCnt = iMsgCnt + 1
       sQuittText = sQuittText & vbCrLf & "# ************ Message " & iMsgCnt & " *******************" & vbCrLf
   
-      DebugPrint "POP- command: " & sbuffer, 2
+      DebugPrint "POP- command: " & sBuffer, 2
       
       sAccount = ""
       sGruppe = ""
@@ -4873,51 +4880,51 @@ Private Function BearbeiteMailAuftrag(col As Collection, ByRef sShutdownFlag As 
 
       bVorhanden = False
       
-      sbuffer = RTrim(sbuffer) & " "
+      sBuffer = RTrim(sBuffer) & " "
       
       'Alles Upcase ..
-      sBufferOrg = sbuffer
-      sbuffer = UCase(sbuffer)
+      sBufferOrg = sBuffer
+      sBuffer = UCase(sBuffer)
       'String zerlegen
       
       sKommando = "nix"
       
       If sKommando = "nix" Then
-          lPos = InStr(1, sbuffer, "READCSV") + 4
+          lPos = InStr(1, sBuffer, "READCSV") + 4
           If lPos > 4 Then
               sKommando = "Read"
               sArtikel = "0"
           End If
       End If
       If sKommando = "nix" Then
-          lPos = InStr(1, sbuffer, "ADDMOD") + 4
+          lPos = InStr(1, sBuffer, "ADDMOD") + 4
           If lPos > 4 Then
               sKommando = "addmod"
           End If
       End If
       If sKommando = "nix" Then
-          lPos = InStr(1, sbuffer, "ADD") + 3
+          lPos = InStr(1, sBuffer, "ADD") + 3
           If lPos > 3 Then
               sKommando = "add"
           End If
       End If
       If sKommando = "nix" Then
-          lPos = InStr(1, sbuffer, "MOD") + 3
+          lPos = InStr(1, sBuffer, "MOD") + 3
           If lPos > 3 Then
               sKommando = "mod"
           End If
       End If
       If sKommando = "nix" Then
-          lPos = InStr(1, sbuffer, "DEL") + 3
+          lPos = InStr(1, sBuffer, "DEL") + 3
           If lPos > 3 Then
               sKommando = "del"
           End If
       End If
       If sKommando = "nix" Then
-          lPos = InStr(1, sbuffer, "STATUS") + 4
+          lPos = InStr(1, sBuffer, "STATUS") + 4
           If lPos > 4 Then
               sKommando = "status"
-              lPos = InStr(1, sbuffer, "REFR")
+              lPos = InStr(1, sBuffer, "REFR")
               If lPos > 0 Then
                   sArtikel = "refresh"
               Else
@@ -4927,7 +4934,7 @@ Private Function BearbeiteMailAuftrag(col As Collection, ByRef sShutdownFlag As 
       End If
       
       If sKommando = "nix" Then
-          lPos = InStr(1, sbuffer, "SEND") + 4
+          lPos = InStr(1, sBuffer, "SEND") + 4
           If lPos > 4 Then
               sKommando = "send"
               sArtikel = "0"
@@ -4935,7 +4942,7 @@ Private Function BearbeiteMailAuftrag(col As Collection, ByRef sShutdownFlag As 
       End If
       
       If sKommando = "nix" Then
-          lPos = InStr(1, sbuffer, "LOAD") + 4
+          lPos = InStr(1, sBuffer, "LOAD") + 4
           If lPos > 4 Then
               sKommando = "load"
               sArtikel = "0"
@@ -4944,16 +4951,16 @@ Private Function BearbeiteMailAuftrag(col As Collection, ByRef sShutdownFlag As 
       
 
       If sKommando = "nix" Then
-          lPos = InStr(1, sbuffer, "SHUTDOWN") + 4
+          lPos = InStr(1, sBuffer, "SHUTDOWN") + 4
           If lPos > 4 Then
               sKommando = "shutdown"
               sArtikel = "0"
               'Zusatzkommandos?
-              lPos = InStr(1, sbuffer, "REMO") + 4
+              lPos = InStr(1, sBuffer, "REMO") + 4
               If lPos > 4 Then
                   sArtikel = "1"
               End If
-              lPos = InStr(1, sbuffer, "NOW") + 3
+              lPos = InStr(1, sBuffer, "NOW") + 3
               If lPos > 3 Then
                   sArtikel = "2"
               End If
@@ -4962,7 +4969,7 @@ Private Function BearbeiteMailAuftrag(col As Collection, ByRef sShutdownFlag As 
       
       
       If sKommando = "nix" Then
-          lPos = InStr(1, sbuffer, "SUSPEND") + 4
+          lPos = InStr(1, sBuffer, "SUSPEND") + 4
           If lPos > 4 Then
               sKommando = "suspend"
               sArtikel = "0"
@@ -4971,7 +4978,7 @@ Private Function BearbeiteMailAuftrag(col As Collection, ByRef sShutdownFlag As 
       
       
       If sKommando = "nix" Then
-          lPos = InStr(1, sbuffer, "END") + 3
+          lPos = InStr(1, sBuffer, "END") + 3
           If lPos > 3 Then
               sKommando = "end"
               sArtikel = "3"
@@ -4980,7 +4987,7 @@ Private Function BearbeiteMailAuftrag(col As Collection, ByRef sShutdownFlag As 
       
       
       If sKommando = "nix" Then
-          lPos = InStr(1, sbuffer, "ENCRYPTION_NEEDED")
+          lPos = InStr(1, sBuffer, "ENCRYPTION_NEEDED")
           If lPos > 0 Then
               sKommando = "Encryption_needed"
               sArtikel = "0"
@@ -4988,37 +4995,37 @@ Private Function BearbeiteMailAuftrag(col As Collection, ByRef sShutdownFlag As 
       End If
       
 
-      lPos = InStr(1, sbuffer, "ART") + 3
+      lPos = InStr(1, sBuffer, "ART") + 3
       
       If lPos > 3 Then
-          lPosStart = InStr(lPos, sbuffer, " ")
+          lPosStart = InStr(lPos, sBuffer, " ")
           Do While lPos = lPosStart
               lPos = lPos + 1
-              lPosStart = InStr(lPos, sbuffer, " ")
+              lPosStart = InStr(lPos, sBuffer, " ")
           Loop
-          sArtikel = Trim(Mid(sbuffer, lPos, lPosStart - lPos))
+          sArtikel = Trim(Mid(sBuffer, lPos, lPosStart - lPos))
       End If
       
       ' Mal sehen, ob und wo ein Gebotsbetrag steht ..
-      lPos = InStr(1, sbuffer, "EURO") + 4
+      lPos = InStr(1, sBuffer, "EURO") + 4
       
       If lPos <= 4 Then
-           lPos = InStr(1, sbuffer, "EUR") + 3
+           lPos = InStr(1, sBuffer, "EUR") + 3
       End If
       If lPos <= 3 Then
-          lPos = InStr(1, sbuffer, "EU") + 2
+          lPos = InStr(1, sBuffer, "EU") + 2
       End If
       If lPos <= 2 Then
-          lPos = InStr(1, sbuffer, "€") + 1
+          lPos = InStr(1, sBuffer, "€") + 1
       End If
 
       If lPos > 1 Then
-          lPosStart = InStr(lPos, sbuffer, " ")
+          lPosStart = InStr(lPos, sBuffer, " ")
           Do While lPos = lPosStart
               lPos = lPos + 1
-              lPosStart = InStr(lPos, sbuffer, " ")
+              lPosStart = InStr(lPos, sBuffer, " ")
           Loop
-          sGebot = Trim(Mid(sbuffer, lPos, lPosStart - lPos))
+          sGebot = Trim(Mid(sBuffer, lPos, lPosStart - lPos))
           
           'und richtig zusammenstauchen:
           fStrVal = String2Float(sGebot)
@@ -5026,22 +5033,22 @@ Private Function BearbeiteMailAuftrag(col As Collection, ByRef sShutdownFlag As 
 
       End If
       
-      lPos = InStr(1, sbuffer, "GRUPPE") + 6
+      lPos = InStr(1, sBuffer, "GRUPPE") + 6
       If lPos > 6 Then
-          lPosStart = InStr(lPos, sbuffer, " ")
+          lPosStart = InStr(lPos, sBuffer, " ")
           Do While lPos = lPosStart
               lPos = lPos + 1
-              lPosStart = InStr(lPos, sbuffer, " ")
+              lPosStart = InStr(lPos, sBuffer, " ")
           Loop
           sGruppe = Trim(Mid(sBufferOrg, lPos, lPosStart - lPos))
       End If
 
-      lPos = InStr(1, sbuffer, "ACCOUNT") + 7
+      lPos = InStr(1, sBuffer, "ACCOUNT") + 7
       If lPos > 7 Then
-          lPosStart = InStr(lPos, sbuffer, " ")
+          lPosStart = InStr(lPos, sBuffer, " ")
           Do While lPos = lPosStart
               lPos = lPos + 1
-              lPosStart = InStr(lPos, sbuffer, " ")
+              lPosStart = InStr(lPos, sBuffer, " ")
           Loop
           sAccount = Trim(Mid(sBufferOrg, lPos, lPosStart - lPos))
       End If
@@ -5278,9 +5285,9 @@ Private Function BearbeiteMailAuftrag(col As Collection, ByRef sShutdownFlag As 
               Next i
               sQuittText = sQuittText & "Quittung- für " & sKommando & IIf(bOk, " Ok", " SendSMTP fehlgeschlagen ")
           Case "read"
-              lPos = InStr(1, sbuffer, "READ") + 4
-              lPos = InStr(lPos, sbuffer, vbCrLf) + 1
-              sArtikelString = Mid(sBufferOrg, lPos, Len(sbuffer) - lPos)
+              lPos = InStr(1, sBuffer, "READ") + 4
+              lPos = InStr(lPos, sBuffer, vbCrLf) + 1
+              sArtikelString = Mid(sBufferOrg, lPos, Len(sBuffer) - lPos)
 
               'wir prüfen jetzt die Version der Artikel.csv und lesen das entsprechende Format ein, lg 04.05.03
               If InStr(sArtikelString, "Artikeldatei") = 0 Then
@@ -6308,7 +6315,7 @@ Private Function Update_Artikel(ByVal iAktRow As Integer, Optional sResultPage A
 Dim sServer As String
 Dim sUser As String
 Dim sKommando As String
-Dim sbuffer As String
+Dim sBuffer As String
 Dim fMinGebot As Double
 Dim iAnzGebote As Integer
 Dim datEndeZeit As Date
@@ -6338,54 +6345,54 @@ Const iMaxUpdateVersuche As Integer = 3
         
         If Not gbUseCurl Then bWait = True
         If Not gbConcurrentUpdates Then bWait = True
-        sbuffer = ShortPost(sServer & sKommando, , , sUser, bWait, True)
+        sBuffer = ShortPost(sServer & sKommando, , , sUser, bWait, True)
         If Not bWait Then DoEvents: Exit Function
         
     Else
     
-      sbuffer = sResultPage
+      sBuffer = sResultPage
     
     End If
     
-    Do While InStr(1, sbuffer, gsAnsSwitchToAnonymous) > 0 And iAnzUpdateVersuche < iMaxUpdateVersuche
+    Do While InStr(1, sBuffer, gsAnsSwitchToAnonymous) > 0 And iAnzUpdateVersuche < iMaxUpdateVersuche
       iAnzUpdateVersuche = iAnzUpdateVersuche + 1
       gbUpdateAnonymous = True
       sServer = "https://" & gsScript4 & gsScriptCommand4
-      sbuffer = ""
+      sBuffer = ""
       sTmp = gsCmdViewItem
       sTmp = Replace(sTmp, "[Item]", sItem)
       
-      sKommando = sbuffer & sTmp
-      sbuffer = ShortPost(sServer & sKommando, , , "anonymous", True, True)
+      sKommando = sBuffer & sTmp
+      sBuffer = ShortPost(sServer & sKommando, , , "anonymous", True, True)
     Loop
     
-    Call KeyAutoSwitch(sbuffer)
+    Call KeyAutoSwitch(sBuffer)
     
     iAktRow = ItemToIndex(sItem) ' und den Index neu berechnen falls der User zwischenzeitlich an der Liste rumgefummelt hat!
     If iAktRow = 0 Then Exit Function ' uups, der Artikel wurde gelöscht, raus hier!
     
-    If Check_Wartung(sbuffer) Or Len(sbuffer) < 100 Then
+    If Check_Wartung(sBuffer) Or Len(sBuffer) < 100 Then
         Call KeyAutoSwitch
         gtarrArtikelArray(iAktRow).UpdateInProgressSince = 0
         Exit Function
     End If
     
-    Update_Artikel = sbuffer
+    Update_Artikel = sBuffer
     
     On Error Resume Next
     bFlag = False
     
-    sTxt = sucheEnde(sbuffer, iAktRow, datEndeZeit)
+    sTxt = sucheEnde(sBuffer, iAktRow, datEndeZeit)
     
     If sTxt = "Fehler" Then
 
         Call DebugPrint("Fehler bei Artikelupdate, versuche Login: ")
 
-        sTmp = LogIn2(sbuffer)
+        sTmp = LogIn2(sBuffer)
         sTmp2 = sucheEnde(sTmp, iAktRow, datEndeZeit)
 
         If sTmp2 <> "Fehler" Then
-          sbuffer = sTmp
+          sBuffer = sTmp
           sTxt = sTmp2
           Call DebugPrint("OK")
         Else
@@ -6394,7 +6401,7 @@ Const iMaxUpdateVersuche As Integer = 3
 
     End If
     
-    If datEndeZeit = gdatENDEZEITNOTFOUND And sucheTitel(sbuffer) = "" Then sTxt = "Invalid"
+    If datEndeZeit = gdatENDEZEITNOTFOUND And sucheTitel(sBuffer) = "" Then sTxt = "Invalid"
     
     If sTxt = "Invalid" Then 'Ungültiger Artikel
         With gtarrArtikelArray(iAktRow)
@@ -6434,23 +6441,23 @@ Const iMaxUpdateVersuche As Integer = 3
         gtarrArtikelArray(iAktRow).EndeZeit = datEndeZeit
         gtarrArtikelArray(iAktRow).TimeZone = GetUTCOffset
     
-        gtarrArtikelArray(iAktRow).Titel = sucheTitel(sbuffer)
-        gtarrArtikelArray(iAktRow).AktPreis = EbayString2Float(sucheAktGebot(sbuffer, sWe, bFlag))
+        gtarrArtikelArray(iAktRow).Titel = sucheTitel(sBuffer)
+        gtarrArtikelArray(iAktRow).AktPreis = EbayString2Float(sucheAktGebot(sBuffer, sWe, bFlag))
         gtarrArtikelArray(iAktRow).WE = sWe
-        gtarrArtikelArray(iAktRow).Bewertung = sucheBewertung(sbuffer)
-        gtarrArtikelArray(iAktRow).Standort = sucheStandort(sbuffer)
-        gtarrArtikelArray(iAktRow).MindestpreisNichtErreicht = InStr(1, sbuffer, gsAnsBuyerReserve)
-        gtarrArtikelArray(iAktRow).Ueberarbeitet = InStr(1, sbuffer, gsAnsRevised)
-        gtarrArtikelArray(iAktRow).Verkaeufer = Trim(sucheVK(sbuffer))
+        gtarrArtikelArray(iAktRow).Bewertung = sucheBewertung(sBuffer)
+        gtarrArtikelArray(iAktRow).Standort = sucheStandort(sBuffer)
+        gtarrArtikelArray(iAktRow).MindestpreisNichtErreicht = InStr(1, sBuffer, gsAnsBuyerReserve)
+        gtarrArtikelArray(iAktRow).Ueberarbeitet = InStr(1, sBuffer, gsAnsRevised)
+        gtarrArtikelArray(iAktRow).Verkaeufer = Trim(sucheVK(sBuffer))
         'Versandkosten nur von eBay überschreiben falls noch nicht manuell gesetzt!
         If Left(gtarrArtikelArray(iAktRow).Versand, 1) <> "*" Then
-          sTmp = Trim(sucheVersand(sbuffer, sWe))
+          sTmp = Trim(sucheVersand(sBuffer, sWe))
           sTmp2 = Trim(Format(EbayString2Float(sTmp), "###,##0.00"))
           If FilterNumeric(sTmp) = FilterNumeric(sTmp2) Then ' numerische Versandkosten
             If sWe <> gtarrArtikelArray(iAktRow).WE Then sTmp2 = sTmp2 & " " & sWe
             gtarrArtikelArray(iAktRow).Versand = sTmp2
           Else
-            gtarrArtikelArray(iAktRow).Versand = Trim(sucheVersand(sbuffer, sWe) & " " & sWe)
+            gtarrArtikelArray(iAktRow).Versand = Trim(sucheVersand(sBuffer, sWe) & " " & sWe)
           End If
         End If
         If gtarrArtikelArray(iAktRow).Versand Like "[?]*" Then gtarrArtikelArray(iAktRow).Versand = "?"
@@ -6459,22 +6466,22 @@ Const iMaxUpdateVersuche As Integer = 3
             If gtarrArtikelArray(iAktRow).Status <= [asNixLos] Or _
                gtarrArtikelArray(iAktRow).Status = [asEnde] Then gtarrArtikelArray(iAktRow).Status = [asBuyOnly]
                
-            gtarrArtikelArray(iAktRow).Bieter = sucheMenge(sbuffer)
+            gtarrArtikelArray(iAktRow).Bieter = sucheMenge(sBuffer)
             If Val(gtarrArtikelArray(iAktRow).Bieter) < 0 Then gtarrArtikelArray(iAktRow).Bieter = "1"
             gtarrArtikelArray(iAktRow).Bieter = gtarrArtikelArray(iAktRow).Bieter & " " & gsarrLangTxt(31)
             
         Else 'nicht nur Sofortkaufen
             
             'Anzahl Gebote und Bieter
-            iAnzGebote = sucheAnzGebote(sbuffer)
+            iAnzGebote = sucheAnzGebote(sBuffer)
             gtarrArtikelArray(iAktRow).AnzGebote = iAnzGebote
-            gtarrArtikelArray(iAktRow).Bieter = Trim(sucheBieter(sbuffer, iAnzGebote, gtarrArtikelArray(iAktRow).Bieter))
+            gtarrArtikelArray(iAktRow).Bieter = Trim(sucheBieter(sBuffer, iAnzGebote, gtarrArtikelArray(iAktRow).Bieter))
             
             'evtl. Powerauktion ???
             If gtarrArtikelArray(iAktRow).Status <= 0 Or gtarrArtikelArray(iAktRow).Status = [asBuyOnly] Then
-                If InStr(1, sbuffer, gsAnsDutch) > 0 Then 'Powerauktion
+                If InStr(1, sBuffer, gsAnsDutch) > 0 Then 'Powerauktion
                     gtarrArtikelArray(iAktRow).Status = [asPower]
-                ElseIf InStr(1, sbuffer, gsAnsAdvertisement) > 0 Then 'Preisanzeige
+                ElseIf InStr(1, sBuffer, gsAnsAdvertisement) > 0 Then 'Preisanzeige
                     gtarrArtikelArray(iAktRow).Status = [asAdvertisement]
                 Else '=> Normal
                     gtarrArtikelArray(iAktRow).Status = [asNixLos]
@@ -6488,7 +6495,7 @@ Const iMaxUpdateVersuche As Integer = 3
           
             Else 'Währung bekannt
             
-                fMinGebot = EbayString2Float(sucheMinGebot(sbuffer, sWe))
+                fMinGebot = EbayString2Float(sucheMinGebot(sBuffer, sWe))
                 If fMinGebot = 0 Then fMinGebot = gtarrArtikelArray(iAktRow).AktPreis
                 If gbSendIfLow _
                   And gtarrArtikelArray(iAktRow).Gebot > 0 _
@@ -6502,7 +6509,7 @@ Const iMaxUpdateVersuche As Integer = 3
         End If
         'Verkäufer zurzeit abwesend ???
         If (gtarrArtikelArray(iAktRow).Status <= 0 Or gtarrArtikelArray(iAktRow).Status = [asBuyOnly]) And _
-           gtarrArtikelArray(iAktRow).AktPreis = 0 And InStr(1, sbuffer, gsAnsSellerAway) > 0 Then
+           gtarrArtikelArray(iAktRow).AktPreis = 0 And InStr(1, sBuffer, gsAnsSellerAway) > 0 Then
           gtarrArtikelArray(iAktRow).Status = [asSellerAway]
         End If
     End If
@@ -9090,7 +9097,7 @@ Private Sub ShowInfo_Timer()
     
     On Error Resume Next
     Dim iTmp As Integer
-    Dim sTmp, sbuffer As String
+    Dim sTmp, sBuffer As String
     Dim sKommando As String
     
     If giSuspendState = 0 Then
@@ -9109,12 +9116,12 @@ Private Sub ShowInfo_Timer()
             If miMouseIndex >= 0 Then
                 If miMouseIndex <> miShowIndex And Len(Artikel(miMouseIndex).Text) > 3 Then
                     miShowIndex = miMouseIndex
-                    sbuffer = ""
+                    sBuffer = ""
                     
                     sTmp = gsCmdViewItem
                     sTmp = Replace(sTmp, "[Item]", Artikel(miShowIndex).Text)
                     
-                    sKommando = sbuffer & sTmp
+                    sKommando = sBuffer & sTmp
                     
                     gsGlobalUrl = "https://" & gsMainUrl & sKommando
                     frmInfo.Show
