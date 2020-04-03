@@ -29,7 +29,6 @@ Option Explicit
 Private Sub Main()
 '...
 '...
-
     
     glThreadID = App.ThreadID
     

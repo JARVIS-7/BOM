@@ -3253,15 +3253,19 @@ Public Sub UpdateCurrencies()
             
             If ExistCollectionKey(gcolWeValues, sKey) Then
                 sTmp = vntLine
+                'Debug.Print sTmp
                 lPos = InStr(lPos + 1, sTmp, gsAnsCurrency2)
                 If lPos > 0 Then
                     sTmp = Mid(sTmp, lPos + Len(gsAnsCurrency2))
+                    Debug.Print sTmp
                     lPos = InStr(1, sTmp, gsAnsCurrency3)
                     If lPos > 0 Then
                         sTmp = Mid(sTmp, lPos + Len(gsAnsCurrency3))
+                        Debug.Print sTmp
                         lPos = InStr(1, sTmp, gsAnsCurrency4)
                         If lPos > 0 Then
                             sTmp = Left(sTmp, lPos - 1)
+                            Debug.Print sTmp
                             If Val(sTmp) > 0 Then
                                 gcolWeValues.Remove sKey
                                 gcolWeValues.Add CDbl(Val(sTmp)), sKey
@@ -3719,8 +3723,10 @@ Public Sub SetAppDataPath()
         Open gsAppDataPath & "\Settings.ini" For Append As #1
         Close #1
         If Err.Number = 0 Then ' und ich darf rein schreiben
-            SaveSettingString HKEY_CURRENT_USER, "Software\Biet-O-Matic\", "AppDataPath", gsAppDataPath
-            Exit Sub ' okay, nehm ich
+            If InStr(gsAppDataPath, ":\Program Files") = 0 Then
+                SaveSettingString HKEY_CURRENT_USER, "Software\Biet-O-Matic\", "AppDataPath", gsAppDataPath
+                Exit Sub ' okay, nehm ich
+            End If
         End If
     End If
     
@@ -3735,6 +3741,7 @@ Public Sub SetAppDataPath()
                 Open gsAppDataPath & "\Settings.ini" For Append As #1
                 Close #1
                 If Err.Number = 0 Then ' und ich darf rein schreiben
+                    
                     SaveSettingString HKEY_CURRENT_USER, "Software\Biet-O-Matic\", "AppDataPath", gsAppDataPath
                     Exit Sub ' okay, nehm ich
                 End If
