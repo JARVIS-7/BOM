@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "MSWINSCK.ocx"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomCtl.ocx"
 Begin VB.Form frmHaupt 
    Caption         =   "Biet-O-Matic"
    ClientHeight    =   4470
@@ -406,8 +406,8 @@ Begin VB.Form frmHaupt
       Top             =   2640
       Visible         =   0   'False
       Width           =   480
-      _extentx        =   847
-      _extenty        =   847
+      _ExtentX        =   847
+      _ExtentY        =   847
    End
    Begin BietOMatic.ctlSMTPRelay SMTP_1 
       Height          =   915
@@ -416,8 +416,8 @@ Begin VB.Form frmHaupt
       Top             =   3240
       Visible         =   0   'False
       Width           =   2415
-      _extentx        =   4260
-      _extenty        =   1614
+      _ExtentX        =   4260
+      _ExtentY        =   1614
    End
    Begin VB.Shape Fokus 
       BorderColor     =   &H00808080&
@@ -2055,7 +2055,7 @@ Public Sub ShowTool(ByVal sUrl As String, ByVal sEncoding As String, iIdx As Int
   
   With gtarrArtikelArray(iIdx)
     vntKeyname = Array("url", "seller", "item", "highbidder", "title", "location", "price", "currency", "group", "comment", "bid", "endtime", "bidcount", "minbid", "timeleft", "timenext", "status")
-    vntKeywert = Array("https://" & gsScript4 & gsScriptCommand4 & gsCmdViewItem, .Verkaeufer, .Artikel, .Bieter, .Titel, .Standort, Format(.AktPreis, "###,##0.00"), .WE, .Gruppe, .Kommentar, Format(.Gebot, "###,##0.00"), Date2Str(.EndeZeit), .AnzGebote, Format(.MinGebot, "###,##0.00"), Abs(Date2UnixDate(.EndeZeit) - Date2UnixDate(MyNow)), Date2UnixDate(MyNow + gfRestzeitZaehler) - Date2UnixDate(MyNow), IIf(.Status = [asOK], 1, 0))
+    vntKeywert = Array("https://" & gsMainUrl & gsCmdViewItem, .Verkaeufer, .Artikel, .Bieter, .Titel, .Standort, Format(.AktPreis, "###,##0.00"), .WE, .Gruppe, .Kommentar, Format(.Gebot, "###,##0.00"), Date2Str(.EndeZeit), .AnzGebote, Format(.MinGebot, "###,##0.00"), Abs(Date2UnixDate(.EndeZeit) - Date2UnixDate(MyNow)), Date2UnixDate(MyNow + gfRestzeitZaehler) - Date2UnixDate(MyNow), IIf(.Status = [asOK], 1, 0))
   End With
   
   
@@ -5697,7 +5697,7 @@ If giSuspendState = 0 Then
         sMailText = Replace(sMailText, "\n", vbCrLf)
         sMailText = Replace(sMailText, vbCrLf, "")
         sMailText = sMailText & vbCrLf & vbCrLf & gsarrLangTxt(430) & vbCrLf
-        sMailText = Replace(sMailText, "[url]", "https://" & gsScript4 & gsScriptCommand4 & gsCmdViewItem)
+        sMailText = Replace(sMailText, "[url]", "https://" & gsMainUrl & gsCmdViewItem)
         sMailText = Replace(sMailText, "[Item]", gtarrArtikelArray(iAktRow).Artikel)
         sMailText = Replace(sMailText, "[item]", gtarrArtikelArray(iAktRow).Artikel)
         sMailText = Replace(sMailText, "[price]", Format(gtarrArtikelArray(iAktRow).AktPreis, "###,##0.00"))
@@ -5866,7 +5866,7 @@ If giSuspendState = 0 Then
             sMailText = Replace(sMailText, "\n", vbCrLf)
             sMailText = Replace(sMailText, vbCrLf, "")
             sMailText = sMailText & vbCrLf & vbCrLf & gsarrLangTxt(430) & vbCrLf
-            sMailText = Replace(sMailText, "[url]", "https://" & gsScript4 & gsScriptCommand4 & gsCmdViewItem)
+            sMailText = Replace(sMailText, "[url]", "https://" & gsMainUrl & gsCmdViewItem)
             sMailText = Replace(sMailText, "[Item]", gtarrArtikelArray(iAktRow).Artikel)
             sMailText = Replace(sMailText, "[item]", gtarrArtikelArray(iAktRow).Artikel)
             sMailText = Replace(sMailText, "[price]", Format(gtarrArtikelArray(iAktRow).AktPreis, "###,##0.00"))
@@ -6357,7 +6357,7 @@ Const iMaxUpdateVersuche As Integer = 3
     Do While InStr(1, sBuffer, gsAnsSwitchToAnonymous) > 0 And iAnzUpdateVersuche < iMaxUpdateVersuche
       iAnzUpdateVersuche = iAnzUpdateVersuche + 1
       gbUpdateAnonymous = True
-      sServer = "https://" & gsScript4 & gsScriptCommand4
+      sServer = "https://" & gsMainUrl
       sBuffer = ""
       sTmp = gsCmdViewItem
       sTmp = Replace(sTmp, "[Item]", sItem)
@@ -6518,7 +6518,7 @@ Const iMaxUpdateVersuche As Integer = 3
         sMailText = Replace(sMailText, "\n", vbCrLf)
         sMailText = Replace(sMailText, vbCrLf, "")
         sMailText = sMailText & vbCrLf & vbCrLf & gsarrLangTxt(791) & vbCrLf
-        sMailText = Replace(sMailText, "[url]", "https://" & gsScript4 & gsScriptCommand4 & gsCmdViewItem)
+        sMailText = Replace(sMailText, "[url]", "https://" & gsMainUrl & gsCmdViewItem)
         sMailText = Replace(sMailText, "[Item]", gtarrArtikelArray(iAktRow).Artikel)
         sMailText = Replace(sMailText, "[item]", gtarrArtikelArray(iAktRow).Artikel)
         sMailText = Replace(sMailText, "[price]", Format(gtarrArtikelArray(iAktRow).AktPreis, "###,##0.00"))
@@ -9198,7 +9198,7 @@ Private Sub CallExtCmd(iIdx As Integer, sExtCmd As String)
     sCmd = sExtCmd
     With gtarrArtikelArray(iIdx)
         vntKeyname = Array("url", "seller", "item", "highbidder", "title", "location", "price", "currency", "group", "comment", "bid", "endtime", "bidcount", "minbid", "timeleft", "timenext", "status", "timediv")
-        vntKeywert = Array("https://" & gsScript4 & gsScriptCommand4 & gsCmdViewItem, .Verkaeufer, .Artikel, .Bieter, .Titel, .Standort, Format(.AktPreis, "###,##0.00"), .WE, .Gruppe, .Kommentar, Format(.Gebot, "###,##0.00"), Date2Str(.EndeZeit), .AnzGebote, Format(.MinGebot, "###,##0.00"), Abs(Date2UnixDate(.EndeZeit) - Date2UnixDate(MyNow)), Date2UnixDate(MyNow + gfRestzeitZaehler) - Date2UnixDate(MyNow), IIf(.Status = [asOK], 1, 0), gfTimeDeviation)
+        vntKeywert = Array("https://" & gsMainUrl & gsCmdViewItem, .Verkaeufer, .Artikel, .Bieter, .Titel, .Standort, Format(.AktPreis, "###,##0.00"), .WE, .Gruppe, .Kommentar, Format(.Gebot, "###,##0.00"), Date2Str(.EndeZeit), .AnzGebote, Format(.MinGebot, "###,##0.00"), Abs(Date2UnixDate(.EndeZeit) - Date2UnixDate(MyNow)), Date2UnixDate(MyNow + gfRestzeitZaehler) - Date2UnixDate(MyNow), IIf(.Status = [asOK], 1, 0), gfTimeDeviation)
     End With
     
     For i = LBound(vntKeywert) To UBound(vntKeywert)
