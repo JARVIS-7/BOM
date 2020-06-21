@@ -79,9 +79,7 @@ Begin VB.Form frmSettings
       TabPicture(1)   =   "frmSettings.frx":0028
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Frame8"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Frame12"
-      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).ControlCount=   2
       TabCaption(2)   =   "Automatik"
       TabPicture(2)   =   "frmSettings.frx":0044
@@ -100,26 +98,26 @@ Begin VB.Form frmSettings
       TabCaption(4)   =   "Server"
       TabPicture(4)   =   "frmSettings.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "Label58"
-      Tab(4).Control(1)=   "Label54"
-      Tab(4).Control(2)=   "Label53"
-      Tab(4).Control(3)=   "Label19"
-      Tab(4).Control(4)=   "Label34"
-      Tab(4).Control(5)=   "Label18"
-      Tab(4).Control(6)=   "Label17"
-      Tab(4).Control(7)=   "Label16"
-      Tab(4).Control(8)=   "txtServer1"
-      Tab(4).Control(8).Enabled=   0   'False
-      Tab(4).Control(9)=   "txtServer2"
-      Tab(4).Control(9).Enabled=   0   'False
-      Tab(4).Control(10)=   "txtServer3"
-      Tab(4).Control(10).Enabled=   0   'False
-      Tab(4).Control(11)=   "txtMainUrl"
-      Tab(4).Control(12)=   "txtServer4"
-      Tab(4).Control(12).Enabled=   0   'False
-      Tab(4).Control(13)=   "txtServer5"
-      Tab(4).Control(13).Enabled=   0   'False
-      Tab(4).Control(14)=   "cboServerStrings"
+      Tab(4).Control(0)=   "cboServerStrings"
+      Tab(4).Control(1)=   "txtServer5"
+      Tab(4).Control(1).Enabled=   0   'False
+      Tab(4).Control(2)=   "txtServer4"
+      Tab(4).Control(2).Enabled=   0   'False
+      Tab(4).Control(3)=   "txtMainUrl"
+      Tab(4).Control(4)=   "txtServer3"
+      Tab(4).Control(4).Enabled=   0   'False
+      Tab(4).Control(5)=   "txtServer2"
+      Tab(4).Control(5).Enabled=   0   'False
+      Tab(4).Control(6)=   "txtServer1"
+      Tab(4).Control(6).Enabled=   0   'False
+      Tab(4).Control(7)=   "Label58"
+      Tab(4).Control(8)=   "Label54"
+      Tab(4).Control(9)=   "Label53"
+      Tab(4).Control(10)=   "Label19"
+      Tab(4).Control(11)=   "Label34"
+      Tab(4).Control(12)=   "Label18"
+      Tab(4).Control(13)=   "Label17"
+      Tab(4).Control(14)=   "Label16"
       Tab(4).ControlCount=   15
       TabCaption(5)   =   "Anzeige"
       TabPicture(5)   =   "frmSettings.frx":0098
@@ -2339,7 +2337,11 @@ If btnAddUser.Caption = gsarrLangTxt(717) Then
   btnDelUser.Enabled = False
   txtUsersNeuEdit.SetFocus
 Else
-
+  If InStr(txtUsersNeuEdit.Text, "@") <> 0 Then
+    MsgBox gsarrLangTxt(755), vbInformation, "Login-Data"
+    txtUsersNeuEdit.SetFocus
+  End If
+ 
   If txtUsersNeuEdit.Text = "" Or txtPassNeuEdit.Text = "" Then
     MsgBox gsarrLangTxt(721) & vbCrLf & gsarrLangTxt(722), vbInformation, gsarrLangTxt(723)
       If txtUsersNeuEdit.Text = "" Then

@@ -1330,6 +1330,16 @@ Public Sub ReadAllSettings()
 
     gbUseCurl = oIni.GetValue("Verbindung", "UseCurl", True)
     If Not TestForCurl() Then gbUseCurl = False
+    If TestForCurl = False Then
+        Dim url As String
+        If MsgBox("Eine dringend benötigte Komponente ist nicht," & vbCrLf & "oder nur in einer veralteten Version verfügbar." & vbCrLf & vbCrLf & _
+                              "Klicken Sie auf 'OK', um Hinweise zu diesem Problems zu erhalten.", vbOKCancel + vbExclamation, "SchnapperPro") = vbOK Then
+            Randomize
+            url = "https://ssl.schnapper.de/SchnapperPro/onlinehelp.php?topic=IE11&lang=0&p=BOM" & "&rnd=" & Int((9999999 * Rnd) + 1)
+            Call ShellExecute(0, "open", url, vbNullString, vbNullString, vbNormalFocus)
+        End If
+    End If
+
     
     iTmp = CINIGetValue(oIni, "Verbindung", "HTTPTimeout", sTmp)
     If iTmp <= 0 Then

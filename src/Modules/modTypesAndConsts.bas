@@ -48,7 +48,7 @@ Public gbNewBOMVersionAvailable As Boolean
 Public gbTest As Boolean     'Tesdrucke
 
 Public Const gsBOMUrlHP As String = "https://github.com/JARVIS-7/BOM/"
-Public Const gsBOMUrlSF As String = "https://ssl.schnapper.de/"
+Public Const gsBOMUrlSF As String = "https://bom.sniper-tool.de/"
 
 'Stati
 'MD-Marker 20090328 Neu angelegt
